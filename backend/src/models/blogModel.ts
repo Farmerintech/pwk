@@ -5,7 +5,8 @@ export interface IBlog extends Document {
   title:Date;
   content:string;
   image:string;
-  postedBy:string;
+  postedBy:mongoose.Types.ObjectId;
+  editedBy:mongoose.Types.ObjectId;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -16,7 +17,8 @@ const blogSchema = new Schema<IBlog>(
     title: { type: Date},
     content:{ type: String, required: true},
     image:{ type: String,},
-    postedBy:{ type: String,},
+    postedBy:{ type: mongoose.Schema.Types.ObjectId, ref:"Admin", required:true},
+    editedBy:{type:mongoose.Schema.Types.ObjectId, ref:"Admin", required:true}
   },
   { timestamps: true }
 );

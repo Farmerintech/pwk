@@ -71,7 +71,7 @@ export const   ActivitiesSection =()=>{
       opacity: 1,
       x: 0,
       transition: {
-        delay: custom * 0.15,
+        delay: custom * 0.05,
         duration: 0.3,
         ease: "easeInOut",
       },
@@ -92,7 +92,7 @@ export const   ActivitiesSection =()=>{
         {cardDetails.map((card, i) => (
           <motion.div
             key={i}
-            className="w-full sm:w-[250px] lg:w-[300px] lg:h-[220px] p-6 rounded-2xl flex flex-col gap-3 bg-[#070F12] border-b-4 hover:-translate-y-1 transition-transform duration-500"
+            className="w-full sm:w-[250px] lg:w-[300px] lg:h-[220px] p-6 rounded-2xl flex flex-col gap-3 bg-[#0d0d12] border-b-4 hover:-translate-y-1 transition-transform duration-500"
             style={{ borderBottomColor: card.color }}
             variants={cardVariants}
             initial="hidden"

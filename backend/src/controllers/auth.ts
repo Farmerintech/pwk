@@ -1,4 +1,4 @@
-import { Request, Response, urlencoded } from "express";
+import { Request, Response } from "express";
 import dotenv from "dotenv";
 import bcrypt from "bcrypt"
 import jwt, {JwtPayload} from "jsonwebtoken";
@@ -133,7 +133,7 @@ export const adminLogin = async (req:Request, res:Response) =>{
     // Build payload
     const payLoad = {
       id: admin?.id,
-      role: "Admin"
+      role: "admin"
     };
 
     const token = jwt.sign(payLoad, ENV.JWT_SECRET, {
@@ -245,7 +245,7 @@ export const resetPassword = async (req:authenticatedRequest, res:Response) =>{
     if(user.role == "user"){
       await UsersModel.findOneAndUpdate({email}, {password:newPsw}, {new:true})
     }
-    if(user.role == "admin"){
+    if(user.role == "admin" || user.role == "super admin"){
       await AdminModel.findOneAndUpdate({email}, {password:newPsw}, {new:true})
     }
   } catch (error) {
@@ -302,10 +302,10 @@ export const createAdmin = async (req:Request, res:Response) =>{
   try {
     const email = ENV.ADMIN_Email;
     const password = ENV.ADMIN_PASSWORD;
-    const superAdmin = await AdminModel.create({
+    const superAdmin = new AdminModel({
       email,
       password,
-      role:"superAdmin"
+      role:"super admin"
     });
     superAdmin.save();
   } catch (error) {

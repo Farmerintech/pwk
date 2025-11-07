@@ -37,7 +37,7 @@ export const Faq = () => {
   const [openId, setOpenId] = useState<number | null>(null);
 
   return (
-    <section className="w-full py-16 bg-[#000306]" id="faq">
+    <section className="w-full py-16 bg-[#0d0d12]" id="faq">
       <div className="max-w-4xl mx-auto px-6">
         <h2 className="text-3xl md:text-4xl font-bold text-center text-white mb-10">
           Frequently Asked Questions
@@ -46,7 +46,7 @@ export const Faq = () => {
           {faqs.map((faq) => (
             <div
               key={faq.id}
-              className="bg-[#070F12] border border-gray-800 rounded-xl shadow-md hover:shadow-lg transition-all"
+              className="bg-white/20 border border-black/10 rounded-xl shadow-md hover:shadow-lg transition-all"
             >
               <button
                 className="w-full flex justify-between items-center p-5 text-left text-white font-medium"

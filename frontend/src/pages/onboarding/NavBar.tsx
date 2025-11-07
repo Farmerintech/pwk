@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { ConnectButton } from "../../components/connectBTN";
 import { useState } from "react";
 import { Overlay } from "./overlay";
 import { FaTimes } from "react-icons/fa";
@@ -28,7 +27,7 @@ const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
  return (
   <>
-   <nav className="bg-[#000306] py-3 flex items-center justify-between px-5 md:px-10 lg:px-16 z-40">
+   <nav className="bg-white/40 text-white font-[600] py-3  flex items-center justify-between px-5 md:px-10 lg:px-16 z-40">
     {/* Left - Logo + Nav Links */}
     {showOverlay && (
      <div className="min-h-screen sticky top-0 left-0 z-50">
@@ -36,7 +35,7 @@ const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
      </div>
     )}
     <div>
-     <p className="text-white text-[18px]">PLAY WITH KWARA YOUTH</p>
+     <p className="text-[18px] text-">PLAY WITH KWARA YOUTH</p>
     </div>
 
     {/* ------------------ MOBILE & DESKTOP MENU ------------------ */}
@@ -57,7 +56,7 @@ const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
       </div>
 
       <li onClick={() => { setIsMobileMenuOpen(false) }}>
-       <Link to="/" className="hover:text-[#3333ff] transition">
+       <Link to="/" className="font-[600] hover:text-[#3333ff] transition">
         Home
        </Link>
       </li>
@@ -65,12 +64,12 @@ const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
        {
         user !== null ?
          (
-          <Link to={`/user/dashboard`} className="hover:text-[#3333ff] transition">
+          <Link to={`/user/dashboard`} className=" font-[600]  hover:text-[#3333ff] transition">
            Dashboard
           </Link>
          ) :
          (
-          <Link to={'/sign_in'} className="hover:text-[#3333ff] transition">
+          <Link to={'/sign_in'} className=" font-[600] hover:text-[#3333ff] transition">
            Dashboard
           </Link>
          )
@@ -79,26 +78,30 @@ const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
       <li onClick={() => { setIsMobileMenuOpen(false) }}>
        <button
         onClick={handleOverlayOpen}
-        className="hover:text-[#3333ff] transition"
+        className="font-[600]  hover:text-[#3333ff] transition"
        >
         SignUp
        </button>
       </li>
       <li onClick={() => { setIsMobileMenuOpen(false) }}>
-       <Link to="/sign_in" className="hover:text-[#3333ff] transition">
+       <Link to="/sign_in" className="font-[600]  hover:text-[#3333ff] transition">
         SignIn
+       </Link>
+      </li>
+      <li>
+       <Link to="/sign_in" className="font-[600] md:hidden hover:text-[#3333ff] transition">
+        Blog
        </Link>
       </li>
      </ul>
     </div>
 
-    {/* Center/Right - Wallet / Connect - Hidden on Mobile */}
-    <div className="hidden md:flex items-center gap-2 justify-center ">
-     <ConnectButton />
+    <div className="hidden md:flex items-center gap-2 justify-center font-[600] bg-blue-800 px-5 py-2 rounded-lg text-white">
+        Blog
     </div>
 
     {/* Right - Mobile Menu Icon - ONLY visible on mobile */}
-    <div className="text-white md:hidden cursor-pointer z-40" onClick={handleNavToggle}>
+    <div className="text-white md:hidden cursor-pointer z-40 bg-blue-800 font-[600] px-2 py-1 rounded-[2px]" onClick={handleNavToggle}>
      <MdGridView size={25} />
     </div>
    </nav>

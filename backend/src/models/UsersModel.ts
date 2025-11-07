@@ -47,7 +47,7 @@ export interface IAdmin extends Document {
   id:string;
   email?: string;
   password:string;
-  role?:string;
+  role?:"admin" | "super admin"
   name?:string;
   status?:"Active" |"Suspended"
   createdAt: Date;

@@ -124,3 +124,67 @@
 .img-left{
   clip-path: polygon(0% 0%, 90% 0%, 100% 100%, 0% 100%);
 }
+
+/* orbit keyframes:
+   - rotate(0) translateX(var(--r)) rotate(0)
+   -> rotate(360) translateX(var(--r)) rotate(-360)
+   This produces circular motion while keeping image upright.
+*/
+@keyframes orbit {
+  from {
+    transform: rotate(0deg) translateX(var(--r)) rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg) translateX(var(--r)) rotate(-360deg);
+  }
+}
+
+/* apply animation and rendering hints to each orbiting image */
+.sat-img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform-origin: center center;
+  will-change: transform;
+  backface-visibility: hidden;
+  /* default radius if not set inline */
+  --r: 200px;
+}
+
+/* responsive sizes:
+   - adjust radius and img dimensions on smaller screens
+*/
+@media (max-width: 768px) {
+  .sat-img {
+    --r: 120px;       /* smaller orbit radius on mobile */
+    width: 56px !important;
+    height: 56px !important;
+  }
+}
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 25s linear infinite;
+}
+.marquee {
+  display: flex;
+  flex-wrap: nowrap;
+  width: max-content;
+  animation: marquee 60s linear infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}

@@ -57,3 +57,24 @@ export const isSuspended = (req:authenticatedRequest, res:Response, next:NextFun
         })
     }
 }
+
+export const AdminWare = (req:authenticatedRequest, res:Response, next:NextFunction) =>{
+    try {
+        const isAnAdmin = req.user.role=== "Admin" || "Super admin";
+        if(!isAnAdmin){
+            return res.status(403)
+            .json({
+                status:"Access denied",
+                messge:"Only an admin is allowed to perform this operation"
+            }) 
+        }
+        next();
+    } catch (error) {
+       return res.status(500)
+        .json({
+            status:"Error",
+            message:"Internal server error",
+            error
+        })  
+    }
+}

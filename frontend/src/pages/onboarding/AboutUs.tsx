@@ -1,4 +1,4 @@
-import Hero from "../../assets/hero-g1.jpg"; // Replace with the right image name
+import Hero from "../../assets/basketball.jpg"; // Replace with the right image name
 
 export const About = () => {
   return (

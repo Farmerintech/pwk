@@ -2,16 +2,15 @@ import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 
 export const Footer = () => {
   return (
-    <footer className="w-full bg-gray-900 text-gray-300 py-10 px-6 md:px-20">
+    <footer className="w-full bg-[#0d0d12] text-gray-300 py-10 px-6 md:px-20">
       <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
         
         {/* Brand */}
         <div>
-          <h2 className="text-2xl font-bold text-white mb-3">Quebec</h2>
+          <h2 className="text-2xl font-bold text-white mb-3">Play With Kwara Youth</h2>
           <p className="text-gray-400 text-sm leading-relaxed">
-            Quebec is a decentralized verification and innovation hub leveraging blockchain
-            technology for secure data, KYC, and transparent digital interactions.
-          </p>
+Play With Kwara Youths connects, inspires, and empowers young people
+        through sports, creativity, and purposeful engagement.          </p>
         </div>
 
         {/* Quick Links */}
@@ -50,9 +49,9 @@ export const Footer = () => {
       </div>
 
       <div className="border-t border-gray-800 mt-10 pt-6 text-center text-sm text-gray-500">
-        <p>© {new Date().getFullYear()} Quebec. All rights reserved.</p>
+        <p>© {new Date().getFullYear()} PWKY. All rights reserved.</p>
         <p className="mt-2 text-gray-400">
-          Built on <span className="font-semibold text-indigo-400">BlockDAG</span> Technology ⚡
+        <span className="font-semibold text-indigo-400">PWKY </span> Sports ⚡
         </p>
       </div>
     </footer>

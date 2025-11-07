@@ -4,9 +4,11 @@ import { IUser } from "./UsersModel";
 export interface IEvent extends Document {
   id?: any;
   fixedDate:Date;
+  tittle:string;
+  description:string;
   status:"Announcement Stage" |"Upcoming" | "Event Day" | "Done";
   Attendees:any[];
-  RegisteredUsers:any[]
+  RegisteredUsers:mongoose.Types.ObjectId[]
   totalRevenueGenerated:number;
   totalCostSpent:number;
   createdAt: Date;
@@ -17,9 +19,11 @@ const EventSchema = new Schema<IEvent>(
   {
     id:{type:mongoose.Types.ObjectId},
     fixedDate: { type: Date},
-    status:{ type: String, enum: ["Foot ball", "Table tennis", "Ludo", "Scrabble"], required: true},
+    tittle:{type:String, required:true},
+    description:{type:String, required:true},
+    status:{ type: String, enum: ["Announcement Stage", "Upcoming", "Event Day", "Done"], required: true},
     Attendees:{ type: [mongoose.Types.ObjectId], ref:"Users"},
-    RegisteredUsers:{ type: [mongoose.Types.ObjectId], ref:"Users"},
+    RegisteredUsers:[{ type: mongoose.Schema.Types.ObjectId, ref:"User"}],
     totalRevenueGenerated:{ type: Number,},
     totalCostSpent:{ type: Number,},
   },
