@@ -208,32 +208,61 @@
 :root {
   --star-count: 1500;
 }
+./* Starfield wrapper */
 .starfield {
   position: absolute;
   inset: 0;
-  z-index: 0;
   pointer-events: none;
   overflow: hidden;
-
-  /* Fake thousands of stars using noise */
-  background-image:
-    radial-gradient(circle, white 1px, transparent 1px);
-  
-  background-size: 3px 3px; /* Dense dots */
-  
-  /* Noise mask creates random dots, not clusters */
-  -webkit-mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-          mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-
-  filter: brightness(1.4);
-  animation: starTwinkle 4s ease-in-out infinite;
+  z-index: -1;
+  background: transparent;
 }
 
-@keyframes starTwinkle {
-  0%, 100% { opacity: 0.9; }
-  50%     { opacity: 1; }
+/* Create multiple stars using pseudo-elements */
+.starfield::before,
+.starfield::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 200%;
+  background-image: radial-gradient(white 1px, transparent 1px);
+  background-size: 2px 2px;
+  animation: drift 120s linear infinite;
+  opacity: 0.6;
 }
 
+/* Make two layers of stars for depth */
+.starfield::after {
+  background-size: 3px 3px;
+  animation-duration: 180s;
+  opacity: 0.4;
+}
+
+/* Subtle movement of stars */
+@keyframes drift {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* Optional twinkle effect using keyframes */
+.starfield::before {
+  animation: drift 120s linear infinite, twinkle 3s ease-in-out infinite;
+}
+
+.starfield::after {
+  animation: drift 180s linear infinite, twinkle 4s ease-in-out infinite;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
 
 .firework {
   position: absolute;
