@@ -1,10 +1,10 @@
 
-import Hero from "../../assets/tennis ball.jpg";
+import Hero from "../../assets/tennisball.png";
 import Hero2 from "../../assets/scrabble1.jpg";
-import Hero1 from "../../assets/football.jpg";
+import Hero1 from "../../assets/football.png";
 import Hero3 from "../../assets/ludo.jpg";
 import Hero4 from "../../assets/basketball.jpg";
-import Hero5 from "../../assets/dice.jpg";
+import Hero5 from "../../assets/dice.png";
 
 
 export const HeroSection = () => {
@@ -109,7 +109,7 @@ export const  HeroSection3 =() =>{
       <img
         src={Hero1}
         alt="Hero1"
-        className={`${baseImgClass}  ${
+        className={`${baseImgClass} border-white/10 ${
           isVisible
             ? "md:left-[10%] xl:left-[20%]  left-[15%] top-[15%] xl:top-[20%] rotate-[-25deg]"
             : "left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rotate-25"
@@ -118,7 +118,7 @@ export const  HeroSection3 =() =>{
       <img
         src={Hero2}
         alt="Hero2"
-        className={`${baseImgClass}  ${
+        className={`${baseImgClass}   border-white/10 ${
           isVisible
             ? "md:right-[10%] right-[15%] xl:right-[20%] top-[20%] xl:top-[25%] rotate-[25deg]"
             : "left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rotate-25"
@@ -127,7 +127,7 @@ export const  HeroSection3 =() =>{
       <img
         src={Hero3}
         alt="Hero3"
-        className={`${baseImgClass}  ${
+        className={`${baseImgClass}   border-white/10 ${
           isVisible
             ? "md:left-[8%] left-[10%] xl:left-[20%] bottom-[25%] rotate-[-65deg]"
             : "left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rotate-65"
@@ -136,7 +136,7 @@ export const  HeroSection3 =() =>{
       <img
         src={Hero4}
         alt="Hero4"
-        className={`${baseImgClass}  ${
+        className={`${baseImgClass}  border-white/10 ${
           isVisible
             ? "md:right-[8%] right-[10%] xl:right-[20%] bottom-[25%] rotate-[65deg]"
             : "left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rotate-65"
@@ -145,7 +145,7 @@ export const  HeroSection3 =() =>{
       <img
         src={Hero5}
         alt="Hero5"
-        className={`${baseImgClass}  ${
+        className={`${baseImgClass}  border-white/10 ${
           isVisible
             ? "left-[45%] top-[5%] rotate-[45deg]"
             : "left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rotate-45"
@@ -154,7 +154,7 @@ export const  HeroSection3 =() =>{
       <img
         src={Hero}
         alt="Hero6"
-        className={`${baseImgClass}  ${
+        className={`${baseImgClass}  border-white/10 ${
           isVisible
             ? "right-[45%] bottom-[5%] rotate-[-60deg]"
             : "left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rotate-45"
