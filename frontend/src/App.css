@@ -209,7 +209,6 @@
   --star-count: 1500;
 }
 ./* Starfield wrapper */
-.sta/* Star styling */
 .star {
   position: absolute;
   width: 2px; /* smaller stars */
