@@ -57,9 +57,9 @@ const GalleryBox = ({ gallery }: any) => {
         lg:w-[420px] 
         xl:w-[480px]"
     >
-      <h3 className=" flex justify-between items-center">
-        <span className="font-semibold text-base md:text-lg mb-3">{gallery.title}</span>
-        <span className="flex gap-3 items-center hover:text-red-500">Explore <FaArrowRight/></span>
+      <h3 className=" flex justify-between item-center">
+        <p className="font-semibold text-base md:text-lg mb-3">{gallery.title}</p>
+        <p className="flex gap-3 justify-between hover:text-red-500 items-center">Explore <FaArrowRight/></p>
       </h3>
 
       {/* ✅ RESPONSIVE GRID */}
