@@ -209,61 +209,49 @@
   --star-count: 1500;
 }
 ./* Starfield wrapper */
-.starfield {
+.sta/* Star styling */
+.star {
   position: absolute;
-  inset: 0;
-  pointer-events: none;
-  overflow: hidden;
-  z-index: -1;
-  background: transparent;
+  width: 2px; /* smaller stars */
+  height: 2px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.7;
+  animation: sparkle 2s infinite ease-out;
+  /* Random initial position */
+  top: calc(var(--top, 0%) * 1%);
+  left: calc(var(--left, 0%) * 1%);
+  transform: scale(0.5);
 }
 
-/* Create multiple stars using pseudo-elements */
-.starfield::before,
-.starfield::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 200%;
-  height: 200%;
-  background-image: radial-gradient(white 1px, transparent 1px);
-  background-size: 2px 2px;
-  animation: drift 120s linear infinite;
-  opacity: 0.6;
+/* Generate random positions using inline style for each star */
+.star:nth-child(n) {
+  --top: calc(100 * var(--rand-top));
+  --left: calc(100 * var(--rand-left));
 }
 
-/* Make two layers of stars for depth */
-.starfield::after {
-  background-size: 3px 3px;
-  animation-duration: 180s;
-  opacity: 0.4;
-}
-
-/* Subtle movement of stars */
-@keyframes drift {
+/* Sparkle animation mimicking fireworks */
+@keyframes sparkle {
   0% {
-    transform: translate(0, 0);
+    opacity: 0.3;
+    transform: scale(0.2);
+    box-shadow: 0 0 white;
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+    box-shadow:
+      5px -5px white,
+      -5px 5px white,
+      5px 5px white,
+      -5px -5px white;
   }
   100% {
-    transform: translate(-50%, -50%);
+    opacity: 0.2;
+    transform: scale(0.3);
+    box-shadow: none;
   }
 }
-
-/* Optional twinkle effect using keyframes */
-.starfield::before {
-  animation: drift 120s linear infinite, twinkle 3s ease-in-out infinite;
-}
-
-.starfield::after {
-  animation: drift 180s linear infinite, twinkle 4s ease-in-out infinite;
-}
-
-@keyframes twinkle {
-  0%, 100% { opacity: 0.5; }
-  50% { opacity: 1; }
-}
-
 .firework {
   position: absolute;
   width: 5px;
