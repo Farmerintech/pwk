@@ -7,13 +7,18 @@ import Hero4 from "../../assets/basketball.jpg";
 import Hero5 from "../../assets/dice.png";
 
 
+// HeroSection.tsx or wherever you want the background
 export const HeroSection = () => {
   return (
-    <section className="relative w-full h-screen bg-black overflow-hidden">
-      {/* Starfield background */}
-      <div className="absolute inset-0 starfield z-0"></div>
+    <section className="relative w-full h-screen overflow-hidden bg-black">
+      {/* White starfield background */}
+      <div className="pointer-events-none absolute inset-0 z-0">
+        {[...Array(500)].map((_, i) => (
+          <div key={i} className="star"></div>
+        ))}
+      </div>
 
-      {/* Your floating hero content */}
+      {/* Your content */}
       <HeroSection3 />
     </section>
   );
