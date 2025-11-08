@@ -1,12 +1,13 @@
 import { Response } from "express";
 import { EventValidator } from "../validators/eventValidator";
 import  { JwtPayload } from "jsonwebtoken";
-import { EventModel } from "../models/EventModel";
-import { IUser } from "../models/UsersModel";
+import { EventModel, IEventUser } from "../models/EventModel";
+import UsersModel, { IUser } from "../models/UsersModel";
 
 interface AuthenticatedRequest extends Request {
   user?: any | JwtPayload;
   params:any
+  body:any
 }
 //admin add event
 export const addEvent = async (req:AuthenticatedRequest, res:Response) =>{
@@ -42,23 +43,39 @@ async (req:AuthenticatedRequest, res:Response) =>{
         const userId = req.user.id;
         const eventId = req.params.event_id;
         const event = await EventModel.findById(eventId);
+        const {gameInterestedIn} = req.body;
         if(!event){
             return res.status(404).json({
                 message:"Not found",
                 error:"The intended event is not found"
             })
         }
+        //check if user with such id exist 
+        const user = await UsersModel.findById(userId);
+         if(!user){
+            return res.status(404).json({
+                message:"Not found",
+                error:"The intended user is not found"
+            })
+        }
         //check if the user is not already registered for the event
-        const isRegistered = event.RegisteredUsers.find((user:IUser) => user.toString() === userId);
+        const isRegistered = event.RegisteredUsers.find((user:IEventUser) => user?.id?.toString() === userId);
         if(isRegistered){
             return res.status(401).json({
                 message:"",
-                error:"You are already registered for this event"
+                error:`"You are already registered for ${event?.tittle} event"`
             });
+        }
+        const newRegisteredUser = {
+            id:userId,
+            name:user.name,
+            sex:user.gender,
+            LGA:user.LGA,
+            gameInterestedIn
         }
         // const newEvent = await EventModel.findByIdAndUpdate(eventId, {RegisteredUsers:[...event.RegisteredUsers, userId]});
         //instead of manual handling of the array, let me use mongoose availabe method to update array path directly.
-        const newEvent = await EventModel.findByIdAndUpdate(eventId, {$push:{RegisteredUsers:userId}});
+        const newEvent = await EventModel.findByIdAndUpdate(eventId, {$push:{RegisteredUsers:newRegisteredUser}});
         return res.status(401).json({
                 message:`You are Registered for ${event?.tittle} Successfully "`
             })

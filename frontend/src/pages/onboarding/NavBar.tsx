@@ -96,12 +96,12 @@ const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
      </ul>
     </div>
 
-    <div className="hidden md:flex items-center gap-2 justify-center font-[600] bg-blue-800 px-5 py-2 rounded-lg text-white">
+    <div className="hidden md:flex items-center gap-2 justify-center font-[600] bg-red-500 px-5 py-2 rounded-lg text-white">
         Blog
     </div>
 
     {/* Right - Mobile Menu Icon - ONLY visible on mobile */}
-    <div className="text-white md:hidden cursor-pointer z-40 bg-blue-800 font-[600] px-2 py-1 rounded-[2px]" onClick={handleNavToggle}>
+    <div className="text-white md:hidden cursor-pointer z-40 font-[600] px-2 py-1 rounded-[2px]" onClick={handleNavToggle}>
      <MdGridView size={25} />
     </div>
    </nav>

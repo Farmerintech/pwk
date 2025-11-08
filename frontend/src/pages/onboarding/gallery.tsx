@@ -3,6 +3,7 @@ import Hero2 from "../../assets/hero-b.jpg";
 import Hero1 from "../../assets/hero-g1.jpg";
 import Hero3 from "../../assets/hero-g3.jpg";
 import Hero4 from "../../assets/hero.jpg";
+import { FaArrowRight } from "react-icons/fa";
 
 export const PWKGalleries = () => {
   const imageSources = [Hero, Hero1, Hero2, Hero3, Hero4];
@@ -56,8 +57,9 @@ const GalleryBox = ({ gallery }: any) => {
         lg:w-[420px] 
         xl:w-[480px]"
     >
-      <h3 className="font-semibold text-base md:text-lg mb-3">
-        {gallery.title}
+      <h3 className=" flex justify-between items-center">
+        <span className="font-semibold text-base md:text-lg mb-3">{gallery.title}</span>
+        <span className="flex gap-3 items-center hover:text-red-500">Explore <FaArrowRight/></span>
       </h3>
 
       {/* ✅ RESPONSIVE GRID */}

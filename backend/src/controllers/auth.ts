@@ -23,7 +23,7 @@ export const Register = async (req: Request, res: Response) => {
     }
 
       const { name, gender, LGA, DOB, email, password, phoneNumber, 
-        gameOfChoice, preferedName, profilePicture } = value;
+        comment, preferedName, profilePicture } = value;
       // Check if user already exists with the provided wallet address
       const existingUser = await UsersModel.findOne({ email });
       if (existingUser) {
@@ -39,7 +39,7 @@ export const Register = async (req: Request, res: Response) => {
       const newUser = new UsersModel(
         {
           name, gender, LGA, DOB, email, password, phoneNumber, 
-          gameOfChoice, preferedName, profilePicture, uniqueId
+          comment, preferedName, profilePicture, uniqueId
         }
       );
   

@@ -45,14 +45,14 @@ export const   ActivitiesSection =()=>{
       color: "#10B981", // teal
     },
     {
-      title: "Ludo & Chess Arena",
+      title: "Ludo",
       text: "Engaging, strategy-driven games that connect minds and encourage creativity and sportsmanship.",
       icon: <FaChess className="text-2xl" />,
       color: "#A855F7", // purple
     },
     {
-      title: "Talent & Creativity Showcase",
-      text: "A vibrant platform where young talents express art, music, dance, and innovation fearlessly.",
+      title: "Games and Fun",
+      text: "A vibrant platform where young engage in different kind of games and sport fearlessly and in all for fun.",
       icon: <FaMicrophoneAlt className="text-2xl" />,
       color: "#EAB308", // yellow
     },

@@ -7,11 +7,11 @@ export const Contact = () => {
             Contact Us
           </h2>
           <p className="text-gray-600 mb-6">
-            Got a question, partnership idea, or feedback about Quebec? 
+            Got a question, partnership idea, or feedback about Play With Kwara Youth? 
             We'd love to hear from you. Fill out the form or reach us via email below.
           </p>
           <p className="text-gray-700">
-            📧 <span className="font-medium">support@quebec.io</span>
+            📧 <span className="font-medium">support@pwkysports.io</span>
           </p>
           <p className="text-gray-700 mt-2">
             📍 Ilorin, Kwara State, Nigeria
@@ -24,7 +24,7 @@ export const Contact = () => {
             <input
               type="text"
               placeholder="Your name"
-              className="w-full bg-[#424242] text-white py-3 px-5 rounded-lg placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#3333ff] transition duration-150"
+              className="w-full bg-white/10 text-white py-3 px-5 rounded-lg placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 transition duration-150"
             />
           </div>
           <div>
@@ -32,7 +32,7 @@ export const Contact = () => {
             <input
               type="email"
               placeholder="Your email"
-              className="w-full bg-[#424242] text-white py-3 px-5 rounded-lg placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#3333ff] transition duration-150"
+              className="w-full w-full bg-white/10  text-white py-3 px-5 rounded-lg placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 transition duration-150"
             />
           </div>
           <div>
@@ -40,12 +40,12 @@ export const Contact = () => {
             <textarea
               rows={4}
               placeholder="Write your message..."
-              className="w-full bg-[#424242] text-white py-3 px-5 rounded-lg placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#3333ff] transition duration-150"
+              className="w-full bg-white/10  text-white py-3 px-5 rounded-lg placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 transition duration-150"
             ></textarea>
           </div>
           <button
             type="submit"
-            className="w-full bg-[#3333ff] text-white py-3 rounded-xl hover:bg-indigo-700 transition-all font-medium"
+            className="w-full bg-red-500 text-white py-3 rounded-xl hover:bg-red-700 transition-all font-medium"
           >
             Send Message
           </button>

@@ -27,7 +27,7 @@ Play With Kwara Youths connects, inspires, and empowers young people
         {/* Contact Info */}
         <div>
           <h3 className="text-lg font-semibold text-white mb-3">Contact</h3>
-          <p className="text-sm text-gray-400 mb-2">support@quebec.io</p>
+          <p className="text-sm text-gray-400 mb-2">support@pwkysports.io</p>
           <p className="text-sm text-gray-400">Ilorin, Kwara State, Nigeria</p>
         </div>
 
