@@ -6,7 +6,7 @@ import { Contact } from "./Contact"
 import { Faq } from "./Faq"
 import { Footer } from "./Footer"
 import {ActivitiesSection} from "./Features"
-import { Endorsements } from "./endorsements"
+import { Endorsements, HallOfFame } from "./endorsements"
 
 export const Home = () => {
     return(
@@ -17,6 +17,7 @@ export const Home = () => {
             <HeroSection/>
             <ActivitiesSection/>
             <Endorsements/>
+            <HallOfFame/>
             <About/>
             <PWKGalleries/>
             <Faq/>

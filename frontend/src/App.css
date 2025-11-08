@@ -188,3 +188,20 @@
     transform: translateX(-50%);
   }
 }
+
+.marquee2 {
+  display: flex;
+  flex-wrap: nowrap;
+  width: max-content;
+  animation: marquee2 60s linear infinite;
+}
+
+@keyframes marquee2 {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
