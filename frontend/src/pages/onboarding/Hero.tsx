@@ -109,7 +109,7 @@ export const  HeroSection3 =() =>{
       <img
         src={Hero1}
         alt="Hero1"
-        className={`${baseImgClass} border-purple-500 ${
+        className={`${baseImgClass}  ${
           isVisible
             ? "md:left-[10%] xl:left-[20%]  left-[15%] top-[15%] xl:top-[20%] rotate-[-25deg]"
             : "left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rotate-25"
@@ -118,7 +118,7 @@ export const  HeroSection3 =() =>{
       <img
         src={Hero2}
         alt="Hero2"
-        className={`${baseImgClass} border-red-500 ${
+        className={`${baseImgClass}  ${
           isVisible
             ? "md:right-[10%] right-[15%] xl:right-[20%] top-[20%] xl:top-[25%] rotate-[25deg]"
             : "left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rotate-25"
@@ -127,7 +127,7 @@ export const  HeroSection3 =() =>{
       <img
         src={Hero3}
         alt="Hero3"
-        className={`${baseImgClass} border-blue-500 ${
+        className={`${baseImgClass}  ${
           isVisible
             ? "md:left-[8%] left-[10%] xl:left-[20%] bottom-[25%] rotate-[-65deg]"
             : "left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rotate-65"
@@ -136,7 +136,7 @@ export const  HeroSection3 =() =>{
       <img
         src={Hero4}
         alt="Hero4"
-        className={`${baseImgClass} border-yellow-500 ${
+        className={`${baseImgClass}  ${
           isVisible
             ? "md:right-[8%] right-[10%] xl:right-[20%] bottom-[25%] rotate-[65deg]"
             : "left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rotate-65"
@@ -145,7 +145,7 @@ export const  HeroSection3 =() =>{
       <img
         src={Hero5}
         alt="Hero5"
-        className={`${baseImgClass} border-green-500 ${
+        className={`${baseImgClass}  ${
           isVisible
             ? "left-[45%] top-[5%] rotate-[45deg]"
             : "left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rotate-45"
@@ -154,7 +154,7 @@ export const  HeroSection3 =() =>{
       <img
         src={Hero}
         alt="Hero6"
-        className={`${baseImgClass} border-pink-500 ${
+        className={`${baseImgClass}  ${
           isVisible
             ? "right-[45%] bottom-[5%] rotate-[-60deg]"
             : "left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rotate-45"
