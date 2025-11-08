@@ -205,3 +205,94 @@
   }
 }
 
+:root {
+  --star-count: 1500;
+}
+
+.starfield {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Single star element */
+.star {
+  position: absolute;
+  width: var(--size);
+  height: var(--size);
+  background: white;
+  border-radius: 50%;
+  opacity: 0.8;
+  filter: drop-shadow(0 0 calc(var(--size) * 3) white);
+
+  animation:
+    drift var(--dur) linear infinite,
+    twinkle var(--tw) ease-in-out infinite;
+  animation-delay: calc(var(--delay) * 1s), calc(var(--twDelay) * 1s);
+}
+
+/* floating movement */
+@keyframes drift {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(calc(var(--dx) * 60vmin), calc(var(--dy) * 60vmin));
+  }
+}
+
+/* shine effect */
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.3;
+    filter: drop-shadow(0 0 0 white);
+  }
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 6px white);
+  }
+}
+
+
+.firework {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: transparent;
+  border-radius: 50%;
+  animation: explode 1.6s infinite ease-out;
+}
+
+/* Random positions */
+.firework:nth-child(1) { top: 20%; left: 30%; animation-delay: 0s; }
+.firework:nth-child(2) { top: 50%; left: 60%; animation-delay: 0.3s; }
+.firework:nth-child(3) { top: 70%; left: 40%; animation-delay: 0.6s; }
+.firework:nth-child(4) { top: 35%; left: 80%; animation-delay: 0.9s; }
+.firework:nth-child(5) { top: 10%; left: 50%; animation-delay: 1.2s; }
+
+@keyframes explode {
+  0% {
+    box-shadow:
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff;
+    opacity: 1;
+    transform: scale(0.3);
+  }
+  70% {
+    box-shadow:
+      30px -30px #ff0000,
+      -25px 20px #00ffea,
+      -30px -25px #ffd700,
+      25px 25px #ff00ea;
+    opacity: 1;
+    transform: scale(1.2);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.4);
+    box-shadow: none;
+  }
+}

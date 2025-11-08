@@ -34,3 +34,34 @@ function App() {
 }
 
 export default App
+// STARFIELD GENERATOR
+
+function createStarfield() {
+  const container = document.getElementById("starfield");
+  if (!container) return;
+
+  const count = parseInt(
+    getComputedStyle(document.documentElement).getPropertyValue("--star-count")
+  ) || 120;
+
+  const rand = (min:number, max:number) => Math.random() * (max - min) + min;
+
+  for (let i = 0; i < count; i++) {
+    const star = document.createElement("div");
+    star.className = "star";
+
+    star.style.setProperty("--size", `${rand(1, 2.3)}px`);
+    star.style.setProperty("--x", `${rand(0, 100)}%`);
+    star.style.setProperty("--y", `${rand(0, 100)}%`);
+    star.style.setProperty("--dx", `${rand(-1, 1)}`);
+    star.style.setProperty("--dy", `${rand(-1, 1)}`);
+    star.style.setProperty("--dur", `${rand(20, 60)}s`);
+    star.style.setProperty("--tw", `${rand(1, 4)}s`);
+    star.style.setProperty("--delay", `${rand(0, 10)}`);
+    star.style.setProperty("--twDelay", `${rand(0, 3)}`);
+
+    container.appendChild(star);
+  }
+}
+
+createStarfield();

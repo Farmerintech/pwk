@@ -14,6 +14,7 @@ export const Contact = () => {
             📧 <span className="font-medium">support@pwkysports.io</span>
           </p>
           <p className="text-gray-700 mt-2">
+            
             📍 Ilorin, Kwara State, Nigeria
           </p>
         </div>

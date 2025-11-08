@@ -10,19 +10,26 @@ import { Endorsements, HallOfFame } from "./endorsements"
 
 export const Home = () => {
     return(
+        <>
         <section className=" ">
-            <div className="md:px-5 lg:px-10  fixed md:top-5 left-0 w-full z-40 backdrop-blur-md">
+            <div className="md:px-5 lg:px-10   fixed md:top-5 left-0 w-full z-40 backdrop-blur-md">
                <NavBar/>
             </div>
             <HeroSection/>
             <ActivitiesSection/>
             <About/>
             <Endorsements/>
+            <>
+                      <div id="starfield" className=""></div>
+
             <HallOfFame/>
+            </>
             <PWKGalleries/>
             <Faq/>
             <Contact/>
             <Footer/>
         </section>
+           </>
+
     )
 }

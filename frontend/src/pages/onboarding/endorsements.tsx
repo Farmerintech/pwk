@@ -103,26 +103,38 @@ const fames = [
     nickName:"Farmerintech"
   }, 
 ]
+const Fireworks = () => {
+  return (
+    <div className="pointer-events-none absolute inset-0 z-100 overflow-hidden">
+      {/* 5 fireworks */}
+      {[...Array(50)].map((_, i) => (
+        <div key={i} className="firework"></div>
+      ))}
+    </div>
+  );
+};
+
 export const HallOfFame = () => {
   return (
     <section className="bg-[#000306] text-white py-16 px-5 md:px-10 xl:px-20 overflow-hidden">
-      <h2 className="text-center text-[20px] md:text-[36px] font-bold mb-12">
-        Play With Kwara Youths Hall of Fame
-      </h2>
+      <div className="relative w-full">
+        <Fireworks />
 
-      {/* Container for infinite scroll */}
-      <div className="relative w-full overflow-hidden">
-        <div className="marquee2 gap-10">
-          {fames.map((e, i) => (
-            <Card2 key={i} data={e} />
-          ))}
-          {fames.map((e, i) => (
-            <Card2 key={`copy-${i}`} data={e} />
-          ))}
+        <h2 className="text-center text-[20px] md:text-[36px] font-bold mb-12">
+          Play With Kwara Youths Hall of Fame
+        </h2>
+
+        <div className="relative w-full overflow-hidden">
+          <div className="marquee2 gap-10">
+            {fames.map((e, i) => (
+              <Card2 key={i} data={e} />
+            ))}
+            {fames.map((e, i) => (
+              <Card2 key={`copy-${i}`} data={e} />
+            ))}
+          </div>
         </div>
       </div>
-
-
     </section>
   );
 };
@@ -134,7 +146,7 @@ const Card2 = ({ data }: any) => (
         src={data.image}
         className="w-[300px] h-[300px] rounded-xl  object-cover"
       />
-      <div>
+      <div className="pl-2">
         <h3 className="font-semibold text-lg">{data.name}</h3>
         <p className="text-gray-400 text-sm">{data.nickName}</p>
         <p className="text-gray-400 text-sm">{data.title}</p>
