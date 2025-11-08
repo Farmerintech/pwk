@@ -12,7 +12,7 @@ export const HeroSection = () => {
   return (
     <section className="relative w-full h-screen overflow-hidden bg-black">
       {/* White starfield background */}
-      <div className="pointer-events-none absolute inset-0 z-20">
+      <div className="pointer-events-none absolute inset-0 z-100">
         {[...Array(1500)].map((_, i) => (
           <div key={i} className="star"></div>
         ))}
