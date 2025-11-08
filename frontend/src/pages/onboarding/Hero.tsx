@@ -9,14 +9,15 @@ import Hero5 from "../../assets/dice.png";
 
 export const HeroSection = () => {
   return (
-    <section className="relative w-full bg-black overflow-hidden z-10">
-      <div className="starfield"></div>
+    <section className="relative w-full h-screen bg-black overflow-hidden">
+      {/* Starfield background */}
+      <div className="absolute inset-0 starfield z-0"></div>
 
+      {/* Your floating hero content */}
       <HeroSection3 />
     </section>
   );
 };
-
 
 
 import { useEffect, useRef, useState } from "react";
