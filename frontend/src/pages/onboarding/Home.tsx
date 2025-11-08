@@ -16,9 +16,9 @@ export const Home = () => {
             </div>
             <HeroSection/>
             <ActivitiesSection/>
+            <About/>
             <Endorsements/>
             <HallOfFame/>
-            <About/>
             <PWKGalleries/>
             <Faq/>
             <Contact/>
