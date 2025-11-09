@@ -1,7 +1,8 @@
 import dotenv from "dotenv";
 dotenv.config();
 
-const requiredVars = ["DB_URI", "ADMIN_PASSWORD", "JWT_SECRET", "GMAIL_PASS", "GMAIL_USER", "ADMIN_Email", "UPLOAD_PRESET", "CLOUDINARY_CLOUD_NAME"] as const;
+const requiredVars = ["DB_URI", "ADMIN_PASSWORD", "JWT_SECRET", "GMAIL_PASS", 
+  "GMAIL_USER", "ADMIN_Email", "UPLOAD_PRESET", "CLOUDINARY_CLOUD_NAME"] as const;
 
 requiredVars.forEach((key) => {
   if (!process.env[key]) {

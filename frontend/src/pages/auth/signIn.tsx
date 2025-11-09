@@ -1,18 +1,18 @@
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import { Input } from "../../components/input";
-import { useAccount } from "wagmi";
 import { useNavigate } from "react-router-dom";
 import {jwtDecode} from "jwt-decode";
 import { useUser } from "../../contexts/UserContext"; // adjust path if needed
+import { MdKey, MdMail } from "react-icons/md";
 
 interface FormData {
-  walletAddress: string;
+  email: string;
   password: string;
 }
 
 interface DecodedToken {
   id: string;
-  walletAddress: string;
+  email: string;
   role: string;
   exp: number;
   iat: number;
@@ -20,9 +20,8 @@ interface DecodedToken {
 
 export const SignIn: React.FC = () => {
   const [loading, setLoading] = useState(false);
-  const { address} = useAccount();
   const [formData, setFormData] = useState<FormData>({
-    walletAddress: "",
+    email: "",
     password: "",
   });
   const [error, setError] = useState<string | null>(null);
@@ -30,21 +29,17 @@ export const SignIn: React.FC = () => {
   const navigate = useNavigate();
   const { login } = useUser(); // from context
 
-  useEffect(() => {
-    if (address) {
-      setFormData((prev) => ({ ...prev, walletAddress: address }));
-    }
-  }, [address]);
+
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
-
+ 
   const handleLogin = async () => {
     setError(null);
 
-    if (!formData.walletAddress || !formData.password) {
-      setError("Wallet address and password are required.");
+    if (!formData.email || !formData.password) {
+      setError("Email and password are required.");
       return;
     }
 
@@ -75,7 +70,7 @@ export const SignIn: React.FC = () => {
       console.log(decoded)
       login({
         id: decoded.id,
-        walletAddress: decoded.walletAddress,
+        email: decoded.email,
         role: decoded.role,
         token,
       });
@@ -90,17 +85,18 @@ export const SignIn: React.FC = () => {
   };
 
   return (
-    <section className="min-h-screen bg-[#000306] font-inter flex flex-col items-center justify-center">
-      <h2 className="text-[#3333ff] text-[26px] font-[600] px-5 mb-10">Sign In</h2>
-      <p className="text-white text-[14px] font-[600] px-5">Enter Password to Continue Signing in</p>
+    <section className="min-h-screen bg-[#000306] font-inter flex flex-col items-start md:items-center justify-center">
+      <h2 className="text-white text-[26px] font-[600] px-5 mb-3">Welcome back</h2>
+      <p className="text-white text-[14px] px-5">Enter your details correctly to login n</p>
 
-      <div className="w-full md:w-[50%] mt-5 px-5 lg:w-[1/2]">
+      <div className="w-full md:w-[50%] mt-5 px-5 lg:w-[1/2] flex flex-col gap-4">
         <Input
-          label="Wallet Address (Detected)"
-          name="walletAddress"
-          placeholder="Connect wallet to display address"
-          value={formData.walletAddress}
+          label="Email"
+          name="Email"
+          placeholder="Enter your email address"
+          value={formData.email}
           action={handleChange}
+          icon = {<MdMail/>}
         />
         <Input
           label="Password"
@@ -109,21 +105,22 @@ export const SignIn: React.FC = () => {
           value={formData.password}
           action={handleChange}
           type="password"
+          icon = {<MdKey/>}
         />
       </div>
 
       {error && (
-        <p className="text-red-500 text-sm mt-2">{error}</p>
+        <p className="text-red-500 text-sm mt-2 px-5">{error}</p>
       )}
 
       <div className="flex items-center justify-center w-full md:w-[50%] px-5">
         <button
           onClick={handleLogin}
-          disabled={loading || !address}
-          className={`mt-8 w-full px-6 py-4 rounded-xl text-lg font-bold transition duration-300 
-          ${loading || !address
+          disabled={loading }
+          className={`mt-8 w-full px-6 py-3 rounded-[8px] text-lg font-bold transition duration-300 
+          ${loading 
               ? "bg-gray-700 text-gray-400 cursor-not-allowed"
-              : "button text-white shadow-lg"
+              : "bg-red-500 hover:bg-red-800 text-white shadow-lg"
             }`}
         >
           {loading ? (
@@ -139,6 +136,7 @@ export const SignIn: React.FC = () => {
           )}
         </button>
       </div>
+              <span className="text-gray-300 text-sm px-5">Have no account yet? <a className="text-red-500">Register</a></span>
     </section>
   );
 };

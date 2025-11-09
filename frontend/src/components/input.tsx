@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { MdVisibility, MdVisibilityOff } from 'react-icons/md';
 
 interface InputProps {
   label: string;
@@ -7,32 +8,39 @@ interface InputProps {
   value: string;
   action: (e: React.ChangeEvent<HTMLInputElement>) => void;
   type?: string;
-  icon?:string
+  icon?: any
 }
 
-export const Input = ({
-  label,
-  name,
-  placeholder,
-  value,
-  action,
-  type = 'text',
-}: InputProps) => (
-  <div className="flex flex-col w-full">
-    <label htmlFor={name} className="text-sm mb-2 text-gray-300">
-      {label}
-    </label>
-    <input
-      id={name}
-      name={name}
-      type={type}
-      placeholder={placeholder}
-      value={value}
-      onChange={action}
-      readOnly={name === 'walletAddress'}
-      className={`w-full bg-[#424242] text-white py-3 px-5 rounded-lg placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#3333ff] transition duration-150 ${
-        name === 'walletAddress' ? 'cursor-not-allowed opacity-70' : ''
-      }`}
-    />
-  </div>
-);
+export const Input = ({ label,name, placeholder, value, action, icon, type = 'text'}: InputProps) => {
+  
+  const [isShown, setIsShown] = useState(false);
+  const handlePasswordShown = () => {
+    setIsShown(!isShown)
+  }
+  return (
+    <div className="flex flex-col w-full">
+      <label htmlFor={name} className="text-sm mb-2 text-gray-300 flex gap-2 items-center">
+        {label} {icon}
+      </label>
+      <div className='relative w-full'>
+        <input
+          id={name}
+          name={name}
+          type={type === "password" && isShown ? "text" : type}
+          placeholder={placeholder}
+          value={value}
+          onChange={action}
+          readOnly={name === 'walletAddress'}
+          className={`w-full bg-white/10 text-white py-3 px-5 rounded-lg placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 transition duration-150 ${name === 'walletAddress' ? 'cursor-not-allowed opacity-70' : ''
+            }`}
+        />
+        {
+          type === "password" &&
+          <div onClick={handlePasswordShown} className='text-white absolute right-5 top-4 cursor-pointer'>
+            {isShown ? <MdVisibility /> : <MdVisibilityOff />}
+          </div>
+        }
+      </div>
+    </div>
+  )
+}

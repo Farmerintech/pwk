@@ -10,7 +10,6 @@ export interface IUser extends Document {
   DOB:string;
   LGA:string;
   phoneNumber:string;
-  comment: string;
   preferedName?: Date;
   profilePicture:string
   role?:string;
@@ -31,7 +30,6 @@ const UserSchema = new Schema<IUser>(
     email: { type: String, unique: true ,},
     LGA: { type: String, required: true },
     phoneNumber:{ type: String, required: true, unique: true },
-    comment: { type: String, required: true },   
     password:{ type: String, required: true },
     preferedName:{type: String, required: true},
     profilePicture:{type: String},

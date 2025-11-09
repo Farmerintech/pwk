@@ -11,8 +11,6 @@ import {
 } from "react-icons/md";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { decryptData } from "../../components/encrypt";
-import { useAccount } from "wagmi";
 import { FaBell } from "react-icons/fa";
 import { useUser } from "../../contexts/UserContext";
 import { Notify } from "../notifications";
@@ -46,11 +44,10 @@ interface ITABLE {
   status:string
 }
 export const Dash = () => {
-  const { address } = useAccount();
   const { user } = useUser();
   const navigate = useNavigate();
 
-  const [Data, setDecryptedData] = useState<KYCData | null>(null);
+  const [Data, ] = useState<KYCData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [id, setId] = useState<string | null>(null);
@@ -65,14 +62,14 @@ export const Dash = () => {
 
   useEffect(() => {
     const fetchKYCData = async () => {
-      if (!address || !user?.token) return;
+      if ( !user?.token) return;
 
       try {
         setLoading(true);
         setError(null);
 
         const response = await fetch(
-          `https://quebec-ur3w.onrender.com/api/kyc/user/${address}`,
+          `https://quebec-ur3w.onrender.com/api/kyc/user/${"hh"}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -88,8 +85,7 @@ export const Dash = () => {
 
         setId(data?.kycDetails?.uniqueId || null);
         setTableData(data?.thirdarty || []); // ✅ handle if null or undefined
-        const decrypted = decryptData(data?.kycDetails?.encryptedData);
-        setDecryptedData(decrypted);
+        // setDecryptedData({});
       } catch (err: any) {
         setError(err.message || "An error occurred while fetching data");
       } finally {
@@ -98,7 +94,7 @@ export const Dash = () => {
     };
 
     fetchKYCData();
-  }, [address, user?.token]);
+  }, [user?.token]);
 
   return (
     <>
@@ -155,7 +151,7 @@ export const Dash = () => {
                   <div className="flex flex-col sm:flex-row justify-between gap-4 mb-6">
                     <div>
                       <p className="text-sm text-[#5FFF92] font-medium">Wallet Address</p>
-                      <small className="md:text-sm text-[10px] ">{address}</small>
+                      <small className="md:text-sm text-[10px] ">{''}</small>
                     </div>
                     <div>
                       <p className="text-sm text-[#5FFF92] font-medium">Unique ID</p>
@@ -264,7 +260,7 @@ export const Sidebar = ({ name, image }: ISide_Bar) => {
     navigate("/");
     login({
       id: "",
-      walletAddress: "",
+      email: "",
       role: "",
       token: "",
     });

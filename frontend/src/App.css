@@ -208,49 +208,47 @@
 :root {
   --star-count: 1500;
 }
-./* Starfield wrapper */
 .star {
   position: absolute;
-  width: 2px; /* smaller stars */
-  height: 2px;
-  background: white;
+  width: 5px;
+  height: 5px;
+  background: transparent;
   border-radius: 50%;
-  opacity: 0.7;
-  animation: sparkle 2s infinite ease-out;
-  /* Random initial position */
-  top: calc(var(--top, 0%) * 1%);
-  left: calc(var(--left, 0%) * 1%);
-  transform: scale(0.5);
+  animation: explode2 1.6s infinite ease-out;
 }
 
-/* Generate random positions using inline style for each star */
-.star:nth-child(n) {
-  --top: calc(100 * var(--rand-top));
-  --left: calc(100 * var(--rand-left));
-}
+/* Random positions */
+.star:nth-child(1) { top: 20%; left: 30%; animation-delay: 0s; }
+.star:nth-child(2) { top: 50%; left: 60%; animation-delay: 0.3s; }
+.star:nth-child(3) { top: 70%; left: 40%; animation-delay: 0.6s; }
+.star:nth-child(4) { top: 35%; left: 80%; animation-delay: 0.9s; }
+.star:nth-child(5) { top: 10%; left: 50%; animation-delay: 1.2s; }
 
-/* Sparkle animation mimicking fireworks */
-@keyframes sparkle {
+@keyframes explode2 {
   0% {
-    opacity: 0.3;
-    transform: scale(0.2);
-    box-shadow: 0 0 white;
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1);
     box-shadow:
-      5px -5px white,
-      -5px 5px white,
-      5px 5px white,
-      -5px -5px white;
+      0 0 #fff,
+      0 0 #fff,
+      0 0 #fff;
+    opacity: 1;
+    transform: scale(0.3);
+  }
+  70% {
+    box-shadow:
+      30px -30px white,
+      -25px 20px white,
+      -30px -25px white,
+      25px 25px white;
+    opacity: 1;
+    transform: scale(1.2);
   }
   100% {
-    opacity: 0.2;
-    transform: scale(0.3);
+    opacity: 0;
+    transform: scale(0.4);
     box-shadow: none;
   }
 }
+
 .firework {
   position: absolute;
   width: 5px;

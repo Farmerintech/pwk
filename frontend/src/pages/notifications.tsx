@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useAccount } from "wagmi";
 import { useUser } from "../contexts/UserContext";
 
 interface Notification {
@@ -15,7 +14,6 @@ interface Notification {
 }
 
 export const Notify: React.FC = () => {
-  const { address } = useAccount();
   const { user } = useUser();
 
   const [uniqueId, setUniqueId] = useState<string>("");
@@ -27,10 +25,9 @@ export const Notify: React.FC = () => {
   // ✅ Fetch KYC Data (get uniqueId)
   useEffect(() => {
     const fetchKYCData = async () => {
-      if (!address || !user?.token) return;
       try {
         const res = await fetch(
-          `https://quebec-ur3w.onrender.com/api/kyc/user/${address}`,
+          `https://quebec-ur3w.onrender.com/api/kyc/user/${''}`,
           {
             method: "GET",
             headers: {
@@ -49,7 +46,7 @@ export const Notify: React.FC = () => {
     };
 
     fetchKYCData();
-  }, [address, user?.token]);
+  }, [ user?.token]);
 
   // ✅ Fetch Notifications
   useEffect(() => {
@@ -58,7 +55,7 @@ export const Notify: React.FC = () => {
       setLoading(true);
       try {
         const res = await fetch(
-          `https://quebec-ur3w.onrender.com/api/kyc/notifications/${address}/${uniqueId}`,
+          `https://quebec-ur3w.onrender.com/api/kyc/notifications/${''}/${uniqueId}`,
           {
             method: "GET",
             headers: {
@@ -83,7 +80,7 @@ export const Notify: React.FC = () => {
     };
 
     fetchNotifications();
-  }, [uniqueId, address, user?.token]);
+  }, [uniqueId, user?.token]);
 
   // ✅ Handle Grant/Revoke Access
   const handleAccessControl = async (

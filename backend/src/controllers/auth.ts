@@ -23,7 +23,7 @@ export const Register = async (req: Request, res: Response) => {
     }
 
       const { name, gender, LGA, DOB, email, password, phoneNumber, 
-        comment, preferedName, profilePicture } = value;
+        preferedName,  } = value;
       // Check if user already exists with the provided wallet address
       const existingUser = await UsersModel.findOne({ email });
       if (existingUser) {
@@ -39,7 +39,7 @@ export const Register = async (req: Request, res: Response) => {
       const newUser = new UsersModel(
         {
           name, gender, LGA, DOB, email, password, phoneNumber, 
-          comment, preferedName, profilePicture, uniqueId
+           preferedName, uniqueId
         }
       );
   
@@ -316,4 +316,3 @@ export const createAdmin = async (req:Request, res:Response) =>{
   }
 }
 
-createAdmin;

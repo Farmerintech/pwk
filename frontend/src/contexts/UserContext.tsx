@@ -2,7 +2,7 @@ import React, { createContext, useContext, useEffect, useState, } from "react";
 import type { ReactNode } from "react";
 interface User {
   id: string;
-  walletAddress: string;
+  email: string;
   role: string;
   token: string;
 }
