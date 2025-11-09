@@ -109,19 +109,19 @@ const { confirmPsw, ...newFormData } = formData;
 
   return (
     <section className="min-h-screen bg-[#000306] font-inter relative">
-      <div className="container mx-auto p-4 sm:p-8 md:p-12 lg:p-20 mt-10">
-        <h2 className="text-white text-[26px] font-[600] px-5 mb-3">
+      <div className="container mx-auto p-4 sm:p-8 md:p-12 lg:p-20 pt-20">
+        <h2 className="text-white text-[26px] font-[600] px-5 mb-3 max-w-4xl  mx-auto">
           Welcome back
         </h2>
-        <p className="text-white text-[14px] px-5">
+        <p className="text-white text-[14px] px-5 max-w-4xl mx-auto">
           We only need a few detail about you to get you started!
         </p>
 
         <form
           onSubmit={handleSubmit}
-          className="w-full max-w-4xl mx-auto space-y-8"
+          className="w-full max-w-4xl xl:max-w-5xl mx-auto space-y-8"
         >
-          <div className="text-white">
+          <div className="text-white xl:flex">
             <aside className="p-6 rounded-2xl mb-8">
               <h2 className="text-xl font-semibold mb-4">Personal Details</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -248,7 +248,7 @@ const { confirmPsw, ...newFormData } = formData;
               <span className="text-white">{error.message}</span>
             }
           </div>
-          <div className="flex items-center justify-center w-full md:px-10">
+          <div className="flex items-center justify-center w-full md:px-10 px-5">
             <button
               type="submit"
               className={`mt-8 w-full px-6 py-4 rounded-xl text-lg font-bold transition 

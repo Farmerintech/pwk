@@ -1,24 +1,17 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { Overlay } from "./overlay";
 import { FaTimes } from "react-icons/fa";
 import { MdGridView } from "react-icons/md";
 import { useUser } from "../../contexts/UserContext";
 
 export const NavBar = () => {
 // const { address, isConnected } = useAccount();
-const [showOverlay, setShowOverlay] = useState(false);
 // State renamed for clarity
 const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); 
 
- const handleOverlayOpen = () => {
-  setShowOverlay(true);
- };
 
  const { user } = useUser();
- const handleOverlayClose = () => {
-  setShowOverlay(false);
- };
+
 
  // Function updated to toggle the menu state
  const handleNavToggle = () => {
@@ -29,11 +22,6 @@ const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   <>
    <nav className="bg-white/40 text-white font-[600] py-3  flex items-center justify-between px-5 md:px-10 lg:px-16 z-40">
     {/* Left - Logo + Nav Links */}
-    {showOverlay && (
-     <div className="min-h-screen sticky top-0 left-0 z-50">
-      <Overlay onClose={handleOverlayClose} />
-     </div>
-    )}
     <div>
      <p className="text-[18px] text-">PLAY WITH KWARA YOUTH</p>
     </div>
@@ -76,12 +64,9 @@ const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
        }
       </li>
       <li onClick={() => { setIsMobileMenuOpen(false) }}>
-       <button
-        onClick={handleOverlayOpen}
-        className="font-[600]  hover:text-[#3333ff] transition"
-       >
+       <Link to="/sign_up/user" className="font-[600]  hover:text-[#3333ff] transition">
         SignUp
-       </button>
+       </Link>
       </li>
       <li onClick={() => { setIsMobileMenuOpen(false) }}>
        <Link to="/sign_in" className="font-[600]  hover:text-[#3333ff] transition">

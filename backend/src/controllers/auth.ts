@@ -14,12 +14,11 @@ export const Register = async (req: Request, res: Response) => {
       const { error, value } = AuthValidator.validate(req.body, { abortEarly: false });
 
     if (error) {
-      res.status(400).json({
+      return res.status(400).json({
         status: 'error',
         message: 'Validation failed',
         error: error.details.map(detail => detail.message),
-      });
-      return; // 
+      }); 
     }
 
       const { name, gender, LGA, DOB, email, password, phoneNumber, 
