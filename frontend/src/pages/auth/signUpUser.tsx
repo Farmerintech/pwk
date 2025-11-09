@@ -43,10 +43,10 @@ const { confirmPsw, ...newFormData } = formData;
           body: JSON.stringify(newFormData),
         }
       );
-      
+      const data = await res.json();
       if (!res.ok) {
-        console.log(res, newFormData)
-        throw new Error("Failed to register user");
+        console.log(data.error, newFormData)
+        throw new Error(error && data.error || "Failed to register user" );
       }
 
       return res.json();
