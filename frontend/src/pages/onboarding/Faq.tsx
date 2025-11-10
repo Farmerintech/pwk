@@ -37,32 +37,37 @@ export const Faq = () => {
   const [openId, setOpenId] = useState<number | null>(null);
 
   return (
-    <section className="w-full py-16 bg-[#0d0d12]" id="faq">
+    <section className="w-full py-16 bg-gray-50" id="faq">
       <div className="max-w-4xl mx-auto px-6">
-        <h2 className="text-3xl md:text-4xl font-bold text-center text-white mb-10">
+        <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-10">
           Frequently Asked Questions
         </h2>
+
         <div className="space-y-4">
           {faqs.map((faq) => (
             <div
               key={faq.id}
-              className="bg-white/20 border border-black/10 rounded-xl shadow-md hover:shadow-lg transition-all"
+              className="bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-all"
             >
+              {/* FAQ Header */}
               <button
-                className="w-full flex justify-between items-center p-5 text-left text-white font-medium"
+                className="w-full flex justify-between items-center p-5 text-left text-gray-900 font-medium"
                 onClick={() => setOpenId(openId === faq.id ? null : faq.id)}
               >
                 {faq.question}
+
                 <span
-                  className={`text-lg transition-all ${
-                    openId === faq.id ? "text-purple-500" : "text-gray-400"
+                  className={`text-lg font-bold transition-all ${
+                    openId === faq.id ? "text-green-600" : "text-gray-400"
                   }`}
                 >
                   {openId === faq.id ? "−" : "+"}
                 </span>
               </button>
+
+              {/* FAQ Answer */}
               {openId === faq.id && (
-                <p className="px-5 pb-5 text-gray-300 text-[15px] leading-relaxed">
+                <p className="px-5 pb-5 text-gray-700 text-[15px] leading-relaxed">
                   {faq.answer}
                 </p>
               )}

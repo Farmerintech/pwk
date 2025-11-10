@@ -20,14 +20,13 @@ export const PWKGalleries = () => {
   ];
 
   return (
-    <section className="bg-[#000306] text-white py-16 px-5 md:px-10 xl:px-20 overflow-hidden">
+    <section className="bg-gray-50 text-gray-900 py-16 px-5 md:px-10 xl:px-20 overflow-hidden">
       <h2 className="text-center text-[28px] md:text-[36px] font-bold mb-10">
         Our Galleries
       </h2>
 
       <div className="relative overflow-hidden w-full">
         <div className="marquee gap-10">
-
           {galleries.map((gallery, i) => (
             <GalleryBox key={i} gallery={gallery} />
           ))}
@@ -35,7 +34,6 @@ export const PWKGalleries = () => {
           {galleries.map((gallery, i) => (
             <GalleryBox key={`copy-${i}`} gallery={gallery} />
           ))}
-
         </div>
       </div>
     </section>
@@ -46,26 +44,32 @@ const GalleryBox = ({ gallery }: any) => {
   return (
     <div
       className="
-        bg-[#0d0d12]
-        border border-white/10
+        bg-white
+        border border-gray-200
         rounded-2xl
-        p-4
-
-        w-[260px] 
-        sm:w-[300px] 
-        md:w-[350px] 
-        lg:w-[420px] 
-        xl:w-[480px]"
+        p-4 shadow-sm
+        
+        w-[260px]
+        sm:w-[300px]
+        md:w-[350px]
+        lg:w-[420px]
+        xl:w-[480px]
+      "
     >
-      <h3 className=" flex justify-between item-center">
-        <p className="font-semibold text-base md:text-lg mb-3">{gallery.title}</p>
-        <p className="flex gap-3 justify-between hover:text-red-500 items-center">Explore <FaArrowRight/></p>
+      <h3 className="flex justify-between items-center">
+        <p className="font-semibold text-base md:text-lg mb-3 text-gray-900">
+          {gallery.title}
+        </p>
+
+        <p className="flex gap-2 items-center text-green-600 hover:text-green-700 transition">
+          Explore <FaArrowRight />
+        </p>
       </h3>
 
-      {/* ✅ RESPONSIVE GRID */}
+      {/* ✅ Responsive Grid */}
       <div
         className="
-          grid 
+          grid
           grid-cols-3
           sm:grid-cols-3
           md:grid-cols-3
@@ -80,8 +84,8 @@ const GalleryBox = ({ gallery }: any) => {
             key={i}
             src={src}
             className="
-            w-[80px]
-              md:w-full 
+              w-[80px]
+              md:w-full
               h-[80px]
               sm:h-[60px]
               md:h-[100px]

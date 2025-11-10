@@ -1,4 +1,3 @@
-import Logo from "../../assets/logo.jpg";
 import { Input } from "../../components/input";
 import {
   MdDashboard,
@@ -9,9 +8,9 @@ import {
   MdSupport,
   MdLogout,
 } from "react-icons/md";
+import { FaBell } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FaBell } from "react-icons/fa";
 import { useUser } from "../../contexts/UserContext";
 import { Notify } from "../notifications";
 
@@ -21,13 +20,19 @@ interface KYCData {
   dob: string;
   ID: {
     type: string;
-    number: any;
+    number: string | number;
   };
   NIN: string;
   phone: string;
   walletAddress: string;
   residentialAddress: string;
   image: string;
+}
+
+interface ITABLE {
+  appName: string;
+  date: string | number | Date;
+  status: string;
 }
 
 const navItems = [
@@ -38,31 +43,27 @@ const navItems = [
   { name: "Settings", icon: <MdSettings size={24} />, path: "settings" },
   { name: "Support", icon: <MdSupport size={24} />, path: "support" },
 ];
-interface ITABLE {
-  appName:string;
-  date:any;
-  status:string
-}
+
 export const Dash = () => {
-  const { user } = useUser();
+  const { user, login } = useUser();
   const navigate = useNavigate();
 
-  const [Data, ] = useState<KYCData | null>(null);
+  const [kycData, setKycData] = useState<KYCData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [id, setId] = useState<string | null>(null);
-  const [show, setShow] = useState<boolean>(false);
+  const [uniqueId, setUniqueId] = useState<string | null>(null);
+  const [showNotify, setShowNotify] = useState<boolean>(false);
   const [tableData, setTableData] = useState<ITABLE[]>([]);
 
   useEffect(() => {
     if (!user?.role || !user?.token) {
-      navigate("/sign_in");
+      // navigate("/sign_in");
     }
   }, [user, navigate]);
 
   useEffect(() => {
     const fetchKYCData = async () => {
-      if ( !user?.token) return;
+      if (!user?.token) return;
 
       try {
         setLoading(true);
@@ -81,11 +82,9 @@ export const Dash = () => {
         if (!response.ok) throw new Error("Failed to fetch KYC data");
 
         const data = await response.json();
-        console.log("Fetched KYC:", data);
-
-        setId(data?.kycDetails?.uniqueId || null);
-        setTableData(data?.thirdarty || []); // ✅ handle if null or undefined
-        // setDecryptedData({});
+        setKycData(data?.kycDetails || null);
+        setUniqueId(data?.kycDetails?.uniqueId || null);
+        setTableData(data?.thirdarty || []);
       } catch (err: any) {
         setError(err.message || "An error occurred while fetching data");
       } finally {
@@ -99,13 +98,13 @@ export const Dash = () => {
   return (
     <>
       {/* Notification overlay */}
-      {show && (
+      {showNotify && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-start z-50"
-          onClick={() => setShow(false)}
+          className="fixed inset-0 bg-black bg-opacity-20 flex justify-center items-start z-50"
+          onClick={() => setShowNotify(false)}
         >
           <div
-            className={`mt-20 w-[90%] md:w-[400px] bg-[#1f1f1f] rounded-xl shadow-lg transition-all duration-500 ease-in-out`}
+            className="mt-20 w-[90%] md:w-[400px] bg-white rounded-xl shadow-lg transition-all duration-500 ease-in-out"
             onClick={(e) => e.stopPropagation()}
           >
             <Notify />
@@ -113,91 +112,145 @@ export const Dash = () => {
         </div>
       )}
 
-      <div className="flex flex-col md:flex-row min-h-screen bg-[#000306] text-white">
+      <div className="flex flex-col md:flex-row min-h-screen bg-gray-50 text-gray-900">
         {/* Sidebar */}
-        <Sidebar name={Data?.fullName || ""} image={Data?.image || ""} />
+        <Sidebar name={kycData?.fullName || ""} image={kycData?.image || ""} login={login} />
+
+        {/* Mobile Footer Nav */}
         <MobileFooterNav />
 
         {/* Main Content */}
-        <main className="flex-1 mt-[5px] md:mt-[20px] lg:mt-0 w-full px-6 lg:px-5 py-10">
+        <main className="flex-1 mt-5 md:mt-8 lg:mt-0 w-full px-6 lg:px-10 py-10">
           {/* Header */}
           <div className="flex justify-between items-center">
-            <h1 className="text-2xl lg:text-3xl font-semibold gradient-text">
-              Welcome {Data?.fullName || "User"}
+            <h1 className="text-2xl lg:text-3xl font-semibold text-gray-800">
+              Welcome {kycData?.fullName || "User"}
             </h1>
-            <button onClick={() => setShow(true)}>
-              <FaBell size={28} />
+            <button onClick={() => setShowNotify(true)}>
+              <FaBell size={28} className="text-gray-600" />
             </button>
           </div>
 
-          {/* Handle Global Loading/Error */}
+          {/* Loading/Error */}
           {loading && (
             <div className="mt-10 text-center text-gray-400 animate-pulse">
               Fetching your data...
             </div>
           )}
           {error && (
-            <div className="mt-10 text-center text-red-500">
-              ⚠️ {error}
-            </div>
+            <div className="mt-10 text-center text-red-500">⚠️ {error}</div>
           )}
 
           {!loading && !error && (
             <>
-              {/* KYC Profile Section */}
+              {/* Profile Section */}
               <section className="flex flex-col lg:flex-row gap-10 mt-10">
                 {/* Profile Card */}
-                <div className="bg-[#2F2F2F] rounded-lg p-6 flex-1">
+                <div className="bg-white rounded-lg p-6 flex-1 shadow">
                   <div className="flex flex-col sm:flex-row justify-between gap-4 mb-6">
                     <div>
-                      <p className="text-sm text-[#5FFF92] font-medium">Wallet Address</p>
-                      <small className="md:text-sm text-[10px] ">{''}</small>
+                      <p className="text-sm text-green-600 font-medium">
+                        Wallet Address
+                      </p>
+                      <small className="text-gray-600">
+                        {kycData?.walletAddress || "N/A"}
+                      </small>
                     </div>
                     <div>
-                      <p className="text-sm text-[#5FFF92] font-medium">Unique ID</p>
-                      <p className="text-sm ">{id || "N/A"}</p>
+                      <p className="text-sm text-green-600 font-medium">Unique ID</p>
+                      <p className="text-gray-800">{uniqueId || "N/A"}</p>
                     </div>
                   </div>
 
                   <div className="flex items-center justify-between mb-6">
                     <img
-                      src={Data?.image}
-                      className="w-[100px] h-[100px] rounded-full object-cover"
+                      src={kycData?.image}
+                      className="w-[100px] h-[100px] rounded-full object-cover border border-gray-300"
                       alt="User"
                     />
-                    <button className="me px-4 py-2 rounded text-sm">Edit Profile</button>
+                    <button className="px-4 py-2 rounded text-sm bg-green-500 text-white hover:bg-green-600">
+                      Edit Profile
+                    </button>
                   </div>
 
                   <div>
-                    <p className="font-semibold mb-4">Stored KYC Data</p>
+                    <p className="font-semibold mb-4 text-gray-800">Stored KYC Data</p>
                     <div className="space-y-4">
-                      <Input placeholder="" label="Full Name" value={Data?.fullName || ""} name="fullName" action={() => {}} />
-                      <Input placeholder="" label="Date of Birth" value={Data?.dob || ""} name="dob" action={() => {}} />
-                      <Input placeholder="" label="Email" value={Data?.email || ""} name="email" action={() => {}} />
-                      <Input placeholder="" label="ID Type" value={Data?.ID?.type || ""} name="idType" action={() => {}} />
-                      <Input placeholder="" label="ID Number" value={Data?.ID?.number || ""} name="idNumber" action={() => {}} />
-                      <Input placeholder="" label="Phone" value={Data?.phone || ""} name="phone" action={() => {}} />
-                      <Input placeholder="" label="Address" value={Data?.residentialAddress || ""} name="residentialAddress" action={() => {}} />
+                      <Input
+                        placeholder=""
+                        label="Full Name"
+                        value={kycData?.fullName || ""}
+                        name="fullName"
+                        action={() => {}}
+                      />
+                      <Input
+                        placeholder=""
+                        label="Date of Birth"
+                        value={kycData?.dob || ""}
+                        name="dob"
+                        action={() => {}}
+                      />
+                      <Input
+                        placeholder=""
+                        label="Email"
+                        value={kycData?.email || ""}
+                        name="email"
+                        action={() => {}}
+                      />
+                      <Input
+                        placeholder=""
+                        label="ID Type"
+                        value={kycData?.ID?.type || ""}
+                        name="idType"
+                        action={() => {}}
+                      />
+                      <Input
+                        placeholder=""
+                        label="ID Number"
+                        value={kycData?.ID?.type || ""}
+                        name="idNumber"
+                        action={() => {}}
+                      />
+                      <Input
+                        placeholder=""
+                        label="Phone"
+                        value={kycData?.phone || ""}
+                        name="phone"
+                        action={() => {}}
+                      />
+                      <Input
+                        placeholder=""
+                        label="Address"
+                        value={kycData?.residentialAddress || ""}
+                        name="residentialAddress"
+                        action={() => {}}
+                      />
                     </div>
                   </div>
                 </div>
 
                 {/* Access Management */}
-                <div className="bg-[#2F2F2F] rounded-lg p-6 w-full lg:w-1/3">
-                  <p className="text-lg font-semibold mb-4">Access Management</p>
-                  <p className="text-sm text-gray-400">Manage third-party access permissions.</p>
+                <div className="bg-white rounded-lg p-6 w-full lg:w-1/3 shadow">
+                  <p className="text-lg font-semibold mb-4 text-gray-800">
+                    Access Management
+                  </p>
+                  <p className="text-sm text-gray-600">
+                    Manage third-party access permissions.
+                  </p>
                 </div>
               </section>
 
               {/* Access History Table */}
               <section>
-                <p className="mt-10 text-lg font-semibold">Access History</p>
+                <p className="mt-10 text-lg font-semibold text-gray-800">Access History</p>
                 <div className="overflow-x-auto mt-8 pb-20">
                   {tableData.length === 0 ? (
-                    <p className="text-gray-400 text-center py-5">No access history found.</p>
+                    <p className="text-gray-500 text-center py-5">
+                      No access history found.
+                    </p>
                   ) : (
-                    <table className="min-w-full text-sm text-left rounded overflow-hidden">
-                      <thead className="bg-[#424242] text-white">
+                    <table className="min-w-full text-sm text-left rounded overflow-hidden shadow">
+                      <thead className="bg-gray-200 text-gray-800">
                         <tr>
                           <th className="px-4 py-3">App Name</th>
                           <th className="px-4 py-3">Date</th>
@@ -207,9 +260,11 @@ export const Dash = () => {
                       </thead>
                       <tbody>
                         {tableData.map((row, i) => (
-                          <tr key={i} className="bg-[#6A5F5F33] border-b border-[#333]">
+                          <tr key={i} className="bg-white border-b border-gray-200">
                             <td className="px-4 py-3">{row.appName}</td>
-                            <td className="px-4 py-3">{new Date(row.date).toLocaleDateString()}</td>
+                            <td className="px-4 py-3">
+                              {new Date(row.date).toLocaleDateString()}
+                            </td>
                             <td
                               className={`px-4 py-3 font-semibold ${
                                 row.status === "Granted"
@@ -245,34 +300,29 @@ export const Dash = () => {
   );
 };
 
-
+// Sidebar component
 interface ISide_Bar {
   name: string;
   image: string;
+  login: Function;
 }
 
-export const Sidebar = ({ name, image }: ISide_Bar) => {
+export const Sidebar = ({ name, image, login }: ISide_Bar) => {
   const [active, setActive] = useState("dashboard");
-  const { login } = useUser();
   const navigate = useNavigate();
 
   const handleLogout = () => {
     navigate("/");
-    login({
-      id: "",
-      email: "",
-      role: "",
-      token: "",
-    });
+    login({ id: "", email: "", role: "", token: "" });
   };
 
   return (
-    <aside className="hidden md:flex md:flex-col bg-[#2F2F2F] text-white w-[260px] h-screen sticky top-0 left-0 overflow-y-hidden">
+    <aside className="hidden md:flex md:flex-col bg-white text-gray-900 w-[260px] h-screen sticky top-0 left-0 shadow-lg">
       <div>
-        <div className="flex items-center gap-4 px-6 py-6">
+        {/* <div className="flex items-center gap-4 px-6 py-6">
           <img src={Logo} className="w-[48px] h-[48px] rounded-full" alt="Logo" />
-          <p className="text-[20px] font-semibold">QUEBEC</p>
-        </div>
+          <p className="text-[20px] font-semibold text-gray-800">QUEBEC</p>
+        </div> */}
 
         <nav className="mt-4 px-5">
           {navItems.map((item) => (
@@ -280,10 +330,10 @@ export const Sidebar = ({ name, image }: ISide_Bar) => {
               to={`/${item.path}`}
               key={item.name}
               onClick={() => setActive(item.path)}
-              className={`flex items-center gap-4 rounded-[8px] md:px-4 lg:px-9 py-4 transition-all ${
+              className={`flex items-center gap-4 rounded-md px-4 py-3 transition-all ${
                 active === item.path
-                  ? "me text-white"
-                  : "text-gray-300 hover:bg-[#3a3a3a]"
+                  ? "bg-green-500 text-white"
+                  : "text-gray-700 hover:bg-gray-100"
               }`}
             >
               {item.icon}
@@ -294,13 +344,13 @@ export const Sidebar = ({ name, image }: ISide_Bar) => {
       </div>
 
       <div className="px-6 pb-6 mt-auto">
-        <div className="flex lg:flex-row flex-col items-start gap-3 mb-4">
+        <div className="flex items-center gap-3 mb-4">
           <img
             src={image}
             alt="User"
-            className="w-[32px] h-[32px] rounded-full object-cover"
+            className="w-[32px] h-[32px] rounded-full object-cover border border-gray-300"
           />
-          <p className="text-[15px] font-medium">{name}</p>
+          <p className="text-[15px] font-medium text-gray-800">{name}</p>
         </div>
 
         <div
@@ -315,6 +365,7 @@ export const Sidebar = ({ name, image }: ISide_Bar) => {
   );
 };
 
+// Mobile Footer Nav
 const mobileNavItems = [
   { name: "Dashboard", icon: <MdDashboard size={24} />, path: "dashboard" },
   { name: "Identity", icon: <MdPerson size={24} />, path: "identity" },
@@ -327,13 +378,13 @@ export const MobileFooterNav = () => {
   const [active, setActive] = useState("dashboard");
 
   return (
-    <nav className="md:hidden fixed bottom-0 left-0 w-full bg-[#2F2F2F] flex justify-between px-4 py-2 border-t border-[#444] z-50">
+    <nav className="md:hidden fixed bottom-0 left-0 w-full bg-white flex justify-between px-4 py-2 border-t border-gray-300 shadow-inner z-50">
       {mobileNavItems.map((item) => (
         <button
           key={item.name}
           onClick={() => setActive(item.path)}
           className={`flex flex-col items-center justify-center flex-1 py-1 ${
-            active === item.path ? "text-white me rounded-md" : "text-gray-400"
+            active === item.path ? "text-green-500" : "text-gray-600"
           }`}
         >
           {item.icon}
