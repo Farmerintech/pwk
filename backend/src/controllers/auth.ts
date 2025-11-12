@@ -106,51 +106,63 @@ export const Login = async (req: Request, res: Response) => {
   }
 };
 
-export const adminLogin = async (req:Request, res:Response) =>{
+
+
+export const adminLogin = async (req: Request, res: Response) => {
   try {
+    // Validate request
     const { error, value } = loginValidator.validate(req.body, { abortEarly: false });
     if (error) {
       return res.status(400).json({
-        status: 'error',
-        message: 'Validation failed',
-        error: error.details.map(detail => detail.message),
+        status: "error",
+        message: "Validation failed",
+        error: error.details.map((detail) => detail.message),
       });
     }
-    //  const SuperEmail = ENV.ADMIN_EMAIL;
-    // const superAdminMail :any = await AdminModel.findOne({SuperEmail});
-    // if(!superAdminMail){
-    // const salt = await bcrypt.genSalt(10) 
-    // const SuperPassword = await bcrypt.hash(ENV.ADMIN_PASSWORD, salt);
-    // const superAdmin = new AdminModel({
-    //   email:SuperEmail,
-    //   password:SuperPassword,
-    //   role:"super admin"
-    // });
-    // superAdmin.save();
-    // }
-      //get the value after from Joi after successful validation
-    const {email, password} = value;
-    const admin:any = await AdminModel.findOne({email});
-    if(!admin){
+
+    // Ensure super admin exists
+    const superEmail = ENV.ADMIN_EMAIL;
+    let superAdmin = await AdminModel.findOne({ email: superEmail });
+
+    if (!superAdmin) {
+      const salt = await bcrypt.genSalt(10);
+      const superPassword = await bcrypt.hash(ENV.ADMIN_PASSWORD, salt);
+
+      superAdmin = new AdminModel({
+        email: superEmail,
+        password: superPassword,
+        role: "super admin",
+      });
+
+      await superAdmin.save(); // make sure to await
+    }
+
+    // Get validated login values
+    const { email, password } = value;
+
+    const admin = await AdminModel.findOne({ email });
+    if (!admin) {
       return res.status(404).json({
-        message:"Validation Error",
-        error:"Wrong email"
-      })
+        message: "Validation Error",
+        error: "Wrong email",
+      });
     }
-    const matched = await bcrypt.compare(password, admin?.password);
-    if(!matched){
-       return res.status(404).json({
-        message:"Validation Error",
-        error:"Incorrect Password"
-      })
+
+    const matched = await bcrypt.compare(password, admin.password);
+    if (!matched) {
+      return res.status(404).json({
+        message: "Validation Error",
+        error: "Incorrect Password",
+      });
     }
+
     // Build payload
-    const payLoad = {
-      id: admin?.id,
-      role: "admin"
+    const payload = {
+      id: admin.id,
+      role: "admin",
     };
 
-    const token = jwt.sign(payLoad, ENV.JWT_SECRET, {
+    const token = jwt.sign(payload, ENV.JWT_SECRET, {
       expiresIn: "11d",
     });
 
@@ -158,17 +170,16 @@ export const adminLogin = async (req:Request, res:Response) =>{
       message: "Login successful",
       isLoggedIn: true,
       token,
-      role:"admin"
+      role: "admin",
     });
-
-  } catch (error) {
-    console.error("Login error:", error);
+  } catch (err: unknown) {
+    console.error("Login error:", err);
     return res.status(500).json({
       message: "Server error",
-      error: error
+      error: err instanceof Error ? err.message : String(err),
     });
   }
-}
+};
 
 export const addAdmin = async (req:Request, res:Response) =>{
   try {
