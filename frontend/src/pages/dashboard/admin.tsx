@@ -11,7 +11,7 @@ import { BarChart } from "../../components/barChat";
 
 export const getUserData = async (token: string) => {
   const response = await fetch(
-    "https://pwk.onrender.com/admin/get_admin",
+    "https://pwk.onrender.com/user/get_users",
     {
       method: "GET",
       headers: {
@@ -45,8 +45,7 @@ export const AdminDash = () => {
   });
 
   // ✅ Clean computed data
-  const userData = data?.user || null;
-  console.log(userData?.user)
+  const userData = data?.users || null;
   return (
     <>
       {/* Notification */}
@@ -115,32 +114,54 @@ export const AdminDash = () => {
           {!isLoading && !error && (
             <>
               {/* <UserStatusChart /> */}
+<section className="bg-white mt-10 p-6 rounded-lg shadow-md">
+  <p className="text-lg font-semibold mb-6">User Data Overview</p>
+
+  <div className="overflow-x-auto pb-4">
+    {userData?.length === 0 ? (
+      <p className="text-gray-400 text-center py-5">
+        No user data found.
+      </p>
+    ) : (
+      <table className="min-w-full text-sm text-left border border-gray-200 rounded-lg overflow-hidden">
+        <thead className="bg-gray-100 text-gray-700">
+          <tr>
+            <th className="px-4 py-3 font-medium">#</th>
+            <th className="px-4 py-3 font-medium">Name</th>
+            <th className="px-4 py-3 font-medium">Gender</th>
+            <th className="px-4 py-3 font-medium">LGA</th>
+            <th className="px-4 py-3 font-medium">Date Added</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {userData.map((user: any, i: number) => (
+            <tr
+              key={i}
+              className={`${
+                i % 2 === 0 ? "bg-white" : "bg-gray-50"
+              } border-b border-gray-100 hover:bg-gray-100`}
+            >
+              <td className="px-4 py-3">{i + 1}</td>
+              <td className="px-4 py-3 capitalize">{user.name || "N/A"}</td>
+              <td className="px-4 py-3 capitalize">{user.gender || "N/A"}</td>
+              <td className="px-4 py-3 capitalize">{user.lga || "N/A"}</td>
+              <td className="px-4 py-3 text-gray-500">
+                {user.createdAt
+                  ? new Date(user.createdAt).toLocaleDateString()
+                  : "N/A"}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    )}
+  </div>
+</section>
 
               {/* Profile Section */}
               <section className="flex flex-col lg:flex-row gap-10 mt-10">
-                <div className="bg-white rounded-lg p-6 flex-1 shadow">
-                  <div className="flex justify-between mb-6">
-                    <div>
-                      <p className="text-sm text-green-600 font-medium">
-                        Nick Name
-                      </p>
-                      <small className="text-gray-600">
-                        {userData?.preferedName}
-                      </small>
-                    </div>
-                  </div>
 
-                  <div className="flex items-center justify-between mb-6">
-                    <img
-                      src={userData?.image || Yakub}
-                      className="w-[100px] h-[100px] rounded-full object-cover border"
-                      alt="User"
-                    />
-                    {/* <button className="px-4 py-2 bg-green-500 text-white rounded">
-                      {/* Edit Profile 
-                    </button> */}
-                  </div>
-                </div>
 
                 <div className="bg-white rounded-lg p-6 w-full lg:w-1/3 shadow">
                   <p className="text-lg font-semibold">Recent Activities</p>
