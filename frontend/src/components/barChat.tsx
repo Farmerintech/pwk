@@ -1,55 +1,36 @@
-import { BarChart, Legend, XAxis, YAxis, CartesianGrid, Tooltip, Bar } from 'recharts';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { Pie } from 'react-chartjs-2';
 
-// #region Sample data
-const data = [
-  {
-    name: 'Page A',
-    uv: 4000,
-    pv: 2400,
-  },
-  {
-    name: 'Page B',
-    uv: 3000,
-    pv: 1398,
-  },
-  {
-    name: 'Page C',
-    uv: 2000,
-    pv: 9800,
-  },
-  {
-    name: 'Page D',
-    uv: 2780,
-    pv: 3908,
-  },
-  {
-    name: 'Page E',
-    uv: 1890,
-    pv: 4800,
-  },
-  {
-    name: 'Page F',
-    uv: 2390,
-    pv: 3800,
-  },
-  {
-    name: 'Page G',
-    uv: 3490,
-    pv: 4300,
-  },
-];
+ChartJS.register(ArcElement, Tooltip, Legend);
 
-// #endregion
-const BarChartExample = ({ isAnimationActive = true }) => (
-  <BarChart style={{ width: '100%', maxWidth: '700px', maxHeight: '70vh', aspectRatio: 1.618 }} responsive data={data}>
-    <CartesianGrid strokeDasharray="3 3" />
-    <XAxis dataKey="name" />
-    <YAxis width="auto" />
-    <Tooltip />
-    <Legend />
-    <Bar dataKey="pv" fill="#8884d8" isAnimationActive={isAnimationActive} />
-    <Bar dataKey="uv" fill="#82ca9d" isAnimationActive={isAnimationActive} />
-  </BarChart>
-);
+export const data = {
+  datasets: [
+    {
+      label: '# of Votes',
+      data: [12, 19, 3, 5, 2, 3],
+      backgroundColor: [
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(255, 159, 64, 0.2)',
+      ],
+      borderColor: [
+        'rgba(255, 99, 132, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)',
+      ],
+      borderWidth: 1,
+    },
+  ],
+    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
 
-export default BarChartExample;
+};
+
+export function BarChat() {
+  return <Pie data={data} />;
+}
