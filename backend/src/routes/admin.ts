@@ -1,14 +1,15 @@
 
 import express from "express";
 import { DeleteAdmin, EditAdmin, getAdmin, getAdmins, SuspendUser, unSuspendUser } from "../controllers/admin";
+import { AdminWare, authMiddleware } from "../middlewares/authMiddleware";
 
 const AdminRoutes = express.Router()
-AdminRoutes.get("/get_admin", getAdmin);
-AdminRoutes.get("/get_admins", getAdmins);
-AdminRoutes.post("/edit_admin", EditAdmin);
-AdminRoutes.delete("/delete_admin", DeleteAdmin);
-AdminRoutes.patch("/suspend", SuspendUser);
-AdminRoutes.patch("/unsuspend", unSuspendUser);
+AdminRoutes.get("/get_admin", authMiddleware, AdminWare, getAdmin);
+AdminRoutes.get("/get_admins", authMiddleware, getAdmins);
+AdminRoutes.post("/edit_admin", authMiddleware,  EditAdmin);
+AdminRoutes.delete("/delete_admin", authMiddleware, DeleteAdmin);
+AdminRoutes.patch("/suspend", authMiddleware, SuspendUser);
+AdminRoutes.patch("/unsuspend", authMiddleware, unSuspendUser);
 
 
 

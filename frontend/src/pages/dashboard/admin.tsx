@@ -1,4 +1,3 @@
-import { Input } from "../../components/input";
 import { FaBell } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -34,7 +33,7 @@ export const AdminDash = () => {
   const user = useAuthStore((state) => state.user);
   useEffect(() =>{
     if(!user || !user.token){
-      navigate("/sign_in")
+      navigate("admin//sign_in")
     }
   })
   // ✅ Fetch user data WITH React Query
@@ -73,15 +72,15 @@ export const AdminDash = () => {
           {/* Header */}
           <div className="flex justify-between items-center">
             <h1 className="text-2xl lg:text-3xl font-semibold">
-              Welcome {userData?.preferedName || "User"}
+              Welcome {userData?.preferedName || "Admin"}
             </h1>
             <button onClick={() => setShowNotify(true)}>
               <FaBell size={28} className="text-gray-600" />
             </button>
           </div>
-          <div className="w-1/3">
+          <div className="lg:w-1/3 md:w-1/2 w-full px-5 py-5 bg-white rounded-[8px] ">
+          <p>Overview</p>
             <PieChart/>
-
           </div>
           {/* Loading */}
           {isLoading && (
@@ -125,116 +124,6 @@ export const AdminDash = () => {
                     {/* <button className="px-4 py-2 bg-green-500 text-white rounded">
                       {/* Edit Profile 
                     </button> */}
-                  </div>
-
-                  <div>
-                    <p className="font-semibold mb-4">Stored information</p>
-
-                    <div className="space-y-4">
-                                  <aside className="flex-1 bg-white p-6 rounded-2xl mb-8 xl:mb-0">
-                                    <h2 className="text-gray-900 text-xl font-semibold mb-4">
-                                      Personal Details
-                                    </h2>
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                      <Input
-                                        label="Full Name"
-                                        name="name"
-                                        placeholder="Enter your full name"
-                                        value={userData?.name}
-                                        action={()=>{}}
-                                      />
-                                      <Input
-                                        label="Date of Birth"
-                                        name="DOB"
-                                        type="text"
-                                        placeholder="mm/dd"
-                                        value={userData?.DOB}
-                                        action={()=>{}}
-                                      />
-                                      <div className="flex flex-col">
-                                        <label className="text-gray-900 text-sm mb-2">Gender</label>
-                                        <select
-                                          name="gender"
-                                          value={userData?.gender}
-                                          onChange={()=>{}}
-                                          className="w-full bg-stone-50 outline-none text-gray-900 py-3 px-5 rounded-lg focus:ring-2 focus:ring-green-500"
-                                        >
-                                          <option value="" disabled>Select Your Gender</option>
-                                          <option value="Male">Male</option>
-                                          <option value="Female">Female</option>
-                                        </select>
-                                      </div>
-                                      <Input
-                                        label="Preferred Name"
-                                        name="preferedName"
-                                        placeholder="Enter your nickname"
-                                        value={userData?.preferedName}
-                                        action={()=>{}}
-                                      />
-                                    </div>
-                                  </aside>
-                      
-                                  {/* Contact & Security */}
-                                  <aside className="flex-1 bg-white p-6 rounded-2xl">
-                                    <h2 className="text-gray-900 text-xl font-semibold mb-4">
-                                      Contact & Security
-                                    </h2>
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                      <Input
-                                        label="Email Address"
-                                        name="email"
-                                        type="email"
-                                        placeholder="Enter your email"
-                                        value={userData?.email}
-                                        action={()=>{}}
-                                      />
-                                      <Input
-                                        label="Phone Number"
-                                        name="phoneNumber"
-                                        type="tel"
-                                        placeholder="+234..."
-                                        value={userData?.phoneNumber}
-                                        action={()=>{}}
-                                      />
-                                    </div>
-                      
-                                    <div className="mt-6">
-                                      <label className="text-gray-900 text-sm mb-2 block">LGA</label>
-                                      {/* <select
-                                        name="LGA"
-                                        value={userData?.LGA}
-                                        onChange={()=>{}}
-                                        className="w-full bg-stone-100 text-gray-900 py-3 px-5 rounded-lg focus:ring-2 outline-none focus:ring-green-500"
-                                      >
-                                        <option value="" disabled>Select Your Local Government</option>
-                                        {LGAs.map(lga => (
-                                          <option key={lga} value={lga}>{lga}</option>
-                                        ))}
-                                      </select> */}
-                                    </div>
-                      
-                                    {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-                                      <p>Change Password</p>
-                                      <Input
-                                        label="Password"
-                                        name="password"
-                                        placeholder="************"
-                                        type="password"
-                                        value={userData?.password}
-                                        action={()=>{}}
-                                      />
-                                      <Input
-                                        label="Confirm Password"
-                                        name="confirmPsw"
-                                        placeholder="************"
-                                        type="password"
-                                        value={userData?.confirmPsw}
-                                        action={()=>{}}
-                                      />
-                                    </div> */}
-                                  </aside>
-                      
-                    </div>
                   </div>
                 </div>
 

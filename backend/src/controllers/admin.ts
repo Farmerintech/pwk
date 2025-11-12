@@ -7,38 +7,51 @@ import UsersModel, { AdminModel } from "../models/UsersModel";
 dotenv.config();
 
 
-interface AuthenticatedRequest extends Request {
-  user?: any | JwtPayload;
-}
+
 
 // const isAuthorized = (req: AuthenticatedRequest, targetWallet: string): boolean => {
 //   return req.user?.walletAddress?.toLowerCase() === targetWallet.toLowerCase();
 // };
 
-export const getAdmin = async (req:AuthenticatedRequest, res:Response) => {
+interface AuthenticatedRequest extends Request {
+  user?: JwtPayload & { id: string; role: string; status: string };
+}
+
+
+
+
+export const getAdmin = async (req: AuthenticatedRequest, res: Response) => {
   try {
-    const id = req.user?.id
-    const user = await AdminModel.findById(id);
-    if(!user){
-      return res.status(404)
-      .json({
-        message:"Authorization error",
-        error:"Unable to find user"
+    const id = req.user?.id;
+
+    if (!id) {
+      return res.status(401).json({
+        message: "Authorization error",
+        error: "User ID missing from token payload",
       });
     }
-    return res.status(2000)
-    .json({
-      message:"Admin retrieved Successfully",
-      user
-    })
+
+    const user = await AdminModel.findById(id);
+
+    if (!user) {
+      return res.status(404).json({
+        message: "Authorization error",
+        error: "Unable to find user",
+        id,
+      });
+    }
+
+    return res.status(200).json({
+      message: "User retrieved Successfully",
+      user,
+    });
   } catch (error) {
-    return res.status(500)
-    .json({
-      message:"Server Error",
-      error
-    })
+    return res.status(500).json({
+      message: "Server Error",
+      error,
+    });
   }
-}
+};
 
 
 export const getAdmins = async (req:AuthenticatedRequest, res:Response) => {
