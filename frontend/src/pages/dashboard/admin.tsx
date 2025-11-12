@@ -7,6 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import { MobileFooterNav, Sidebar } from "./sideBar";
 import Yakub from "../../assets/yakub.jpg"
 import { PieChart } from "../../components/pieChart";
+import { BarChart } from "../../components/barChat";
 
 export const getUserData = async (token: string) => {
   const response = await fetch(
@@ -77,11 +78,17 @@ export const AdminDash = () => {
             <button onClick={() => setShowNotify(true)}>
               <FaBell size={28} className="text-gray-600" />
             </button>
-          </div>
-          <div className="lg:w-1/3 md:w-1/2 w-full px-5 py-5 bg-white rounded-[8px] ">
-          <p>Overview</p>
+          </div>            <p>Overview</p>
+
+          <section className="flex justify-between items-center">
+            <div className="lg:w-1/3 md:w-1/2 w-full px-5 py-5 bg-white rounded-[8px] ">
             <PieChart/>
           </div>
+          <div className="lg:w-1/3 md:w-1/2 w-full px-5 py-5 bg-white rounded-[8px] ">
+            <BarChart/>
+          </div>
+          </section>
+          
           {/* Loading */}
           {isLoading && (
             <div className="mt-10 text-center text-gray-400 animate-pulse">
