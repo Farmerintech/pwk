@@ -69,25 +69,33 @@ export const AdminDash = () => {
         <Sidebar name={userData?.name || ""} image={userData?.image || Yakub} login={()=>{}} />
           <MobileFooterNav/>
         {/* Main Content */}
-        <main className="flex-1 mt-5 md:mt-8 lg:mt-0 w-full px-6 lg:px-10 py-10">
+        <main className="flex-1 mt-5 md:mt-8 lg:mt-0 w-full px-6 lg:px-10 pt-5 pb-10">
           {/* Header */}
-          <div className="flex justify-between items-center">
+          <div className="flex justify-between items-center  px-5 py-5 mb-5 rounded-[8px]">
             <h1 className="text-2xl lg:text-3xl font-semibold">
               Welcome {userData?.preferedName || "Admin"}
             </h1>
             <button onClick={() => setShowNotify(true)}>
               <FaBell size={28} className="text-gray-600" />
             </button>
-          </div>            <p>Overview</p>
+          </div>      
+<p className="text-[36px] font-[600] mb-4">Overview</p>
 
-          <section className="flex justify-between items-center">
-            <div className="lg:w-1/3 md:w-1/2 w-full px-5 py-5 bg-white rounded-[8px] ">
-            <PieChart/>
-          </div>
-          <div className="lg:w-1/3 md:w-1/2 w-full px-5 py-5 bg-white rounded-[8px] ">
-            <BarChart/>
-          </div>
-          </section>
+<section className="flex flex-col md:flex-row justify-center gap-5 items-start">
+  {/* Pie Chart */}
+  <div className="w-full md:w-1/2 bg-white rounded-[8px] p-5 shadow-md">
+    <div className="relative w-full h-[300px] ">
+      <PieChart />
+    </div>
+  </div>
+
+  {/* Bar Chart */}
+  <div className="w-full md:w-1/2 bg-white rounded-[8px] p-5 shadow-md">
+    <div className="relative w-full h-[300px]">
+      <BarChart />
+    </div>
+  </div>
+</section>
           
           {/* Loading */}
           {isLoading && (
