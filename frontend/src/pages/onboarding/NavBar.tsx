@@ -2,12 +2,14 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import { MdGridView } from "react-icons/md";
+import { useAuthStore } from "../../contexts/UserContext";
 
 export const NavBar = () => {
 // const { address, isConnected } = useAccount();
 // State renamed for clarity
 const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); 
 
+   const user = useAuthStore((state) => state.user);
 
 
 
@@ -15,6 +17,7 @@ const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
  const handleNavToggle = () => {
   setIsMobileMenuOpen(!isMobileMenuOpen);
  };
+ 
 
  return (
   <>
@@ -48,11 +51,17 @@ const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
       </li>
       <li onClick={() => { setIsMobileMenuOpen(false) }}>
        {
-        
+        user && user?.role !=='' ?
          (
           <Link to={'/user/dashboard'} className=" font-[600] hover:text-green-600 text-black  transition">
            Dashboard
           </Link>
+         ):(
+            <li onClick={() => { setIsMobileMenuOpen(false) }}>
+       <Link to="/sign_in" className="font-[600]  hover:text-green-600 text-black  transition">
+        SignIn
+       </Link>
+      </li>
          )
        }
       </li>
@@ -61,6 +70,7 @@ const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
         SignUp
        </Link>
       </li>
+    
       <li onClick={() => { setIsMobileMenuOpen(false) }}>
        <Link to="/sign_in" className="font-[600]  hover:text-green-600 text-black  transition">
         SignIn
