@@ -128,7 +128,7 @@ const Fireworks = () => {
 
 export const HallOfFame = () => {
   return (
-    <section className="bg-gray-50 text-gray-900 py-16 px-5 md:px-10 xl:px-20 overflow-hidden">
+    <section className="bg-gray-50 text-gray-900 py-16 backdrop-blur-xl px-5 md:px-10 xl:px-20 overflow-hidden">
       <div className="relative w-full">
         <Fireworks />
 
@@ -152,7 +152,7 @@ export const HallOfFame = () => {
 };
 
 const Card2 = ({ data }: any) => (
-  <div className="flex-shrink-0 w-[300px] flex flex-col bg-white border border-gray-200 shadow-md p-0 rounded-2xl">
+  <div className="flex-shrink-0 w-[300px] flex flex-col bg-white border border-gray-200 p-0 rounded-2xl">
     <div className="flex flex-col items-start p-3 gap-4">
       <img
         src={data.image}

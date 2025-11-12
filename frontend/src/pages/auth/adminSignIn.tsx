@@ -20,7 +20,7 @@ interface IUSER {
   message:string
 }
 
-export const SignIn: React.FC = () => {
+export const AdminSignIn: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({ email: "", password: "" });
       const login = useAuthStore((state) => state.login);
 
@@ -127,4 +127,4 @@ export const SignIn: React.FC = () => {
   );
 };
 
-export default SignIn;
+export default AdminSignIn;

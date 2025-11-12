@@ -37,7 +37,7 @@ export const Register = async (req: Request, res: Response) => {
       // Create a new user entry
       const newUser = new UsersModel(
         {
-          name, gender, LGA, DOB, email, password, phoneNumber, 
+          name, gender, LGA, DOB, email, password:hashedPassword, phoneNumber, 
            preferedName, uniqueId
         }
       );
@@ -81,8 +81,9 @@ export const Login = async (req: Request, res: Response) => {
 
     // Build payload
     const payLoad = {
-      id: user.id,
-      role: user.role
+      id: user._id,
+      role: user.role,
+      status:user.status
     };
 
     const token = jwt.sign(payLoad, ENV.JWT_SECRET, {
@@ -92,6 +93,8 @@ export const Login = async (req: Request, res: Response) => {
     return res.status(200).json({
       message: "Login successful",
       isLoggedIn: true,
+      id:user._id,
+      role:user.role,
       token,
     });
   } catch (error) {
@@ -113,16 +116,28 @@ export const adminLogin = async (req:Request, res:Response) =>{
         error: error.details.map(detail => detail.message),
       });
     }
+    //  const SuperEmail = ENV.ADMIN_EMAIL;
+    // const superAdminMail :any = await AdminModel.findOne({SuperEmail});
+    // if(!superAdminMail){
+    // const salt = await bcrypt.genSalt(10) 
+    // const SuperPassword = await bcrypt.hash(ENV.ADMIN_PASSWORD, salt);
+    // const superAdmin = new AdminModel({
+    //   email:SuperEmail,
+    //   password:SuperPassword,
+    //   role:"super admin"
+    // });
+    // superAdmin.save();
+    // }
       //get the value after from Joi after successful validation
     const {email, password} = value;
-    const admin:any = AdminModel.findOne({email});
+    const admin:any = await AdminModel.findOne({email});
     if(!admin){
       return res.status(404).json({
         message:"Validation Error",
         error:"Wrong email"
       })
     }
-    const matched = await bcrypt.compare(password, ENV.ADMIN_PASSWORD);
+    const matched = await bcrypt.compare(password, admin?.password);
     if(!matched){
        return res.status(404).json({
         message:"Validation Error",
@@ -143,6 +158,7 @@ export const adminLogin = async (req:Request, res:Response) =>{
       message: "Login successful",
       isLoggedIn: true,
       token,
+      role:"admin"
     });
 
   } catch (error) {
@@ -289,24 +305,6 @@ export const forgetPsw = async (req:Request, res:Response) =>{
     if(user.role == "admin"){
       await AdminModel.findOneAndUpdate({email}, {password}, {new:true})
     }
-  } catch (error) {
-     return res.status(500).json({
-        message:"Server Error",
-        error:error
-      })
-  }
-}
-
-export const createAdmin = async (req:Request, res:Response) =>{
-  try {
-    const email = ENV.ADMIN_Email;
-    const password = ENV.ADMIN_PASSWORD;
-    const superAdmin = new AdminModel({
-      email,
-      password,
-      role:"super admin"
-    });
-    superAdmin.save();
   } catch (error) {
      return res.status(500).json({
         message:"Server Error",

@@ -2,7 +2,9 @@ import Hero from "../../assets/basketball.jpg";
 
 export const About = () => {
   return (
-    <section className="bg-gray-50 gap-8 pt-10 px-5 md:px-10 xl:px-20 flex flex-col-reverse md:flex-row items-center justify-center">
+    <section 
+    
+    className="bg- bgc gap-8 bg-cover bg-center pt-10 px-5 md:px-10 xl:px-20 flex flex-col-reverse md:flex-row items-center justify-center">
       {/* Left: Image */}
       <div className="flex-1 flex justify-center pb-5 md:pb-0">
         <img

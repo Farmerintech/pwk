@@ -1,11 +1,12 @@
 
 import express from "express";
 import { DeleteUser, EditUser, getUser, getUsers } from "../controllers/user";
+import { authMiddleware } from "../middlewares/authMiddleware";
 
 const UserRoute = express.Router()
-UserRoute.get("/get_user", getUser);
+UserRoute.get("/get_user", authMiddleware, getUser);
 UserRoute.get("/get_users", getUsers);
-UserRoute.post("/edit_user", EditUser);
+UserRoute.put("/edit_user", EditUser);
 UserRoute.delete("/delete_user", DeleteUser);
 
 

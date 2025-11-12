@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const requiredVars = ["DB_URI", "ADMIN_PASSWORD", "JWT_SECRET", "GMAIL_PASS", 
-  "GMAIL_USER", "ADMIN_Email", "UPLOAD_PRESET", "CLOUDINARY_CLOUD_NAME"] as const;
+  "GMAIL_USER", "ADMIN_EMAIL", "UPLOAD_PRESET", "CLOUDINARY_CLOUD_NAME"] as const;
 
 requiredVars.forEach((key) => {
   if (!process.env[key]) {
@@ -16,7 +16,7 @@ export const ENV = {
   RPC_URL:process.env.RPC_URL,
   JWT_SECRET: process.env.JWT_SECRET as string,
   ADMIN_PASSWORD:process.env.ADMIN_PASSWORD as string,
-  ADMIN_Email:process.env.ADMIN_PASSWORD as string,
+  ADMIN_EMAIL:process.env.ADMIN_EMAIL as string,
   GMAIL_PASS:process.env.GMAIL_PASS as string,
   GMAIL_USER:process.env.USER as string,
   CORS_ORIGIN: process.env.CORS_ORIGIN || process.env.CLIENT_URL || "http://localhost:8081",

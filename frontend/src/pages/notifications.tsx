@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useUser } from "../contexts/UserContext";
+import { useAuthStore } from "../contexts/UserContext";
 
 interface Notification {
   _id: string;
@@ -14,7 +14,7 @@ interface Notification {
 }
 
 export const Notify: React.FC = () => {
-  const { user } = useUser();
+  const { user } = useAuthStore();
 
   const [uniqueId, setUniqueId] = useState<string>("");
   const [notifications, setNotifications] = useState<Notification[]>([]);

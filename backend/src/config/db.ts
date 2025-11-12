@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import { ENV } from "./env";
-import { createAdmin } from "../controllers/auth";
 
 export const ConnectDB = async (shouldDrop: boolean = false) => {
   try {

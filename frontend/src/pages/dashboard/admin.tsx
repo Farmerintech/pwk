@@ -7,6 +7,7 @@ import { useAuthStore } from "../../contexts/UserContext";
 import { useQuery } from "@tanstack/react-query";
 import { MobileFooterNav, Sidebar } from "./sideBar";
 import Yakub from "../../assets/yakub.jpg"
+import { PieChart } from "../../components/pieChart";
 
 export const getUserData = async (token: string) => {
   const response = await fetch(
@@ -26,7 +27,7 @@ export const getUserData = async (token: string) => {
   return response.json(); // return raw API data
 };
 
-export const Dash = () => {
+export const AdminDash = () => {
   const navigate = useNavigate();
   const [showNotify, setShowNotify] = useState(false);
 
@@ -77,6 +78,10 @@ export const Dash = () => {
             <button onClick={() => setShowNotify(true)}>
               <FaBell size={28} className="text-gray-600" />
             </button>
+          </div>
+          <div className="w-1/3">
+            <PieChart/>
+
           </div>
           {/* Loading */}
           {isLoading && (

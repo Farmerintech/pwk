@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import { MdGridView } from "react-icons/md";
-import { useUser } from "../../contexts/UserContext";
 
 export const NavBar = () => {
 // const { address, isConnected } = useAccount();
@@ -10,7 +9,6 @@ export const NavBar = () => {
 const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); 
 
 
- const { user } = useUser();
 
 
  // Function updated to toggle the menu state
@@ -20,7 +18,7 @@ const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
  return (
   <>
-   <nav className="bg-white  font-[600] py-3  flex items-center justify-between px-5 md:px-10 lg:px-16 z-40">
+   <nav className="bg-white backdrop-blur-xl font-[600] py-3  flex items-center justify-between px-5 md:px-10 lg:px-16 z-40">
     {/* Left - Logo + Nav Links */}
     <div>
      <p className="text-[18px] text-">PLAY WITH KWARA YOUTH</p>
@@ -50,12 +48,7 @@ const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
       </li>
       <li onClick={() => { setIsMobileMenuOpen(false) }}>
        {
-        user !== null ?
-         (
-          <Link to={`/user/dashboard`} className=" font-[600]  hover:text-green-600 text-black  transition">
-           Dashboard
-          </Link>
-         ) :
+        
          (
           <Link to={'/user/dashboard'} className=" font-[600] hover:text-green-600 text-black  transition">
            Dashboard
