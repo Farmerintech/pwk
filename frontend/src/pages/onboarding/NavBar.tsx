@@ -51,15 +51,15 @@ const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
       </li>
       <li onClick={() => { setIsMobileMenuOpen(false) }}>
        {
-        user && user?.role !=='' ?
+        user && user?.role !==null ?
          (
-          <Link to={'/user/dashboard'} className=" font-[600] hover:text-green-600 text-black  transition">
+          <Link to={`/${user?.role}/dashboard`} className=" font-[600] hover:text-green-600 text-black  transition">
            Dashboard
           </Link>
          ):(
             <li onClick={() => { setIsMobileMenuOpen(false) }}>
        <Link to="/sign_in" className="font-[600]  hover:text-green-600 text-black  transition">
-        SignIn
+        Dashboard
        </Link>
       </li>
          )
