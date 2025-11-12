@@ -11,7 +11,7 @@ import { PieChart } from "../../components/pieChart";
 
 export const getUserData = async (token: string) => {
   const response = await fetch(
-    "http://localhost:8000/api/user/get_user",
+    "https://pwk.onrender.com/admin/get_admin",
     {
       method: "GET",
       headers: {

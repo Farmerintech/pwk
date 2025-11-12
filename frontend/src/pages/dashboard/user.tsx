@@ -10,7 +10,7 @@ import Yakub from "../../assets/yakub.jpg"
 
 export const getUserData = async (token: string) => {
   const response = await fetch(
-    "http://localhost:8000/api/user/get_user",
+    "https://pwk.onrender.com/api/user/get_user",
     {
       method: "GET",
       headers: {
