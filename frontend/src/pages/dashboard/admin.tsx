@@ -78,9 +78,9 @@ export const AdminDash = () => {
         <Sidebar name={userData?.name || ""} image={userData?.image || Yakub} login={() => { }} />
         <MobileFooterNav />
         {/* Main Content */}
-        <main className="flex-1 mt-5 md:mt-8 lg:mt-0 w-full  pb-10">
-          <div className="bg-white pt-2 py-2">
-            <p className="font-[600] px-5">Dashboard</p>
+        <main className="flex-1 lg:mt-0 w-full  pb-10">
+          <div className="bg-white pt-5">
+            <p className="font-[600] px-5 py-2">Dashboard</p>
           </div>
           {/* Header */}
           <div className="flex justify-between items-center  px-5 py-2 mb-5 rounded-[8px]">
@@ -88,7 +88,7 @@ export const AdminDash = () => {
               Welcome back {userData?.preferedName || "Admin"}
             </h1>
             <button onClick={() => setShowNotify(true)}>
-              <FaBell size={28} className="text-gray-600" />
+              <FaBell size={20} className="text-gray-600" />
             </button>
           </div>
           <p className="px-3 font-[600]">Events🎉🏆</p>
