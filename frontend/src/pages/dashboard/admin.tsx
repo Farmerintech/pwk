@@ -79,8 +79,8 @@ export const AdminDash = () => {
         <MobileFooterNav />
         {/* Main Content */}
         <main className="flex-1 mt-5 md:mt-8 lg:mt-0 w-full  pb-10">
-          <div className="bg-white pt-2">
-            <p>Dashboard</p>
+          <div className="bg-white pt-2 py-2">
+            <p className="font-[600] px-5">Dashboard</p>
           </div>
           {/* Header */}
           <div className="flex justify-between items-center  px-5 py-2 mb-5 rounded-[8px]">
