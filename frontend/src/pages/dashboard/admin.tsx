@@ -79,17 +79,18 @@ export const AdminDash = () => {
         <MobileFooterNav />
         {/* Main Content */}
         <main className="flex-1 lg:mt-0 w-full  pb-10">
-          <div className="bg-white pt-5">
+          <div className="bg-white pt-5 flex justify-between items-center">
             <p className="font-[600] px-5 py-2">Dashboard</p>
+            <button onClick={() => setShowNotify(true)}>
+              <FaBell size={20} className="text-gray-600" />
+            </button>
           </div>
           {/* Header */}
           <div className="flex justify-between items-center  px-5 py-2 mb-5 rounded-[8px]">
             <h1 className="text-xl lg:text-2xl font-semibold">
               Welcome back {userData?.preferedName || "Admin"}
             </h1>
-            <button onClick={() => setShowNotify(true)}>
-              <FaBell size={20} className="text-gray-600" />
-            </button>
+            
           </div>
           <p className="px-3 font-[600]">Events🎉🏆</p>
           <div className="relative w-full overflow-hidden px-3 py-2">
@@ -113,7 +114,7 @@ export const AdminDash = () => {
             }
           </div>
           </div>
-          <p className="font-[600] py-5"> Users Statistics Overview</p>
+          <p className="font-[600] py-5 px-5 "> Users Statistics Overview</p>
           <section className="flex flex-col md:flex-row justify-center gap-5 items-start px-5">
             {/* Pie Chart */}
             <div className="w-full md:w-1/3 bg-white rounded-[8px] p-5 shadow-md">
