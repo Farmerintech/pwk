@@ -113,7 +113,7 @@ export const AdminDash = () => {
             }
           </div>
           </div>
-          <p className="font-[600] py-5> Users Statistics Overview </p>
+          <p className="font-[600] py-5"> Users Statistics Overview</p>
           <section className="flex flex-col md:flex-row justify-center gap-5 items-start px-5">
             {/* Pie Chart */}
             <div className="w-full md:w-1/3 bg-white rounded-[8px] p-5 shadow-md">
