@@ -97,10 +97,10 @@ export const AdminDash = () => {
           <div className="marquee2 gap-10">
             {
               ['pwky 1.0', 'pwky 2.0', 'pwky 3.0', 'pwky 4.0', 'pwky 5.0'].map(item => (
-                <div className="bg-white w-[300px] px-6 gap-3 flex flex-col py-3">
+                <div className="bg-white w-[200px] px-6 gap-3 flex flex-col py-3">
                   <p className="flex justify-between">
                     <span>{item} 📈 </span>
-                    <span className="text-[12px] items-center flex gap-3">View stats <FaEye /></span>
+                    <span className="text-[12px] items-center flex gap-3">View <FaEye /></span>
                   </p>
                   <p className="flex items-center">
                     <span className="text-xl">1,200</span>
