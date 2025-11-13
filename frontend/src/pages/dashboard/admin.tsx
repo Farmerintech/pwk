@@ -92,7 +92,8 @@ export const AdminDash = () => {
             </button>
           </div>
           <p className="px-3 font-[600]">Events</p>
-          <div className=" gap-3 py-4 marquee2 px-3 ">
+          <div className="relative w-full overflow-hidden px-3 py-2">
+          <div className="marquee2 gap-10">
             {
               ['pwky 1.0', 'pwky 2.0', 'pwky 3.0', 'pwky 4.0', 'pwky 5.0'].map(item => (
                 <div className="bg-white w-[200px] px-6 gap-3 flex flex-col py-3">
@@ -110,6 +111,7 @@ export const AdminDash = () => {
                 </div>
               ))
             }
+          </div>
           </div>
           <section className="flex flex-col md:flex-row justify-center gap-5 items-start px-5">
             {/* Pie Chart */}
