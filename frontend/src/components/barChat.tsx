@@ -13,6 +13,7 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
 export const options = {
   responsive: true,
+  maintainAspectRatio: false,
   plugins: {
     legend: {
       position: "top" as const,
@@ -20,6 +21,18 @@ export const options = {
     title: {
       display: true,
       text: "Users by Local Government Area",
+    },
+  },
+  scales: {
+    x: {
+      ticks: {
+        autoSkip: false,
+        maxRotation:75,
+        minRotation: 75,
+      },
+      // Make bars thinner by controlling spacing
+      categoryPercentage: 0.2, // default 0.8, smaller = thinner bars
+      barPercentage: 0.2,      // default 0.9, smaller = thinner bars
     },
   },
 };
@@ -43,22 +56,22 @@ const labels = [
   "Patigi",
 ];
 
-// Example dummy data (replace these numbers with actual values)
 const dataset1 = [12, 5, 9, 7, 10, 15, 13, 18, 6, 4, 8, 11, 9, 5, 7, 10];
-// const dataset2 = [8, 3, 6, 5, 9, 10, 12, 16, 4, 2, 7, 8, 6, 4, 5, 9];
 
 export const data = {
   labels,
   datasets: [
     {
-      label: "LGA",
+      label: "Number of Users",
       data: dataset1,
-      backgroundColor: "rgba(255, 99, 132, 0.5)",
+      backgroundColor: "rgba(54, 162, 235, 0.6)",
+      borderWidth: 0.2,
     },
-   
   ],
 };
 
 export function BarChart() {
-  return <Bar options={options} data={data} />;
+  return (
+        <Bar data={data} options={options} />
+  );
 }

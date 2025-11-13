@@ -1,4 +1,4 @@
-import { FaBell } from "react-icons/fa";
+import { FaArrowLeft, FaArrowUp, FaBell, FaEye, FaUser } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Notify } from "../notifications";
@@ -9,43 +9,53 @@ import Yakub from "../../assets/yakub.jpg"
 import { PieChart } from "../../components/pieChart";
 import { BarChart } from "../../components/barChat";
 
+// ✅ Fetch user data
 export const getUserData = async (token: string) => {
-  const response = await fetch(
-    "https://pwk.onrender.com/user/get_users",
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
+  const response = await fetch("https://pwk.onrender.com/api/user/get_users", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
   if (!response.ok) {
     throw new Error("Unable to fetch user data");
   }
 
-  return response.json(); // return raw API data
+  // Always parse JSON safely
+  const result = await response.json();
+  return result; // Return the parsed data
 };
 
 export const AdminDash = () => {
   const navigate = useNavigate();
   const [showNotify, setShowNotify] = useState(false);
-
   const user = useAuthStore((state) => state.user);
-  useEffect(() =>{
-    if(!user || !user.token){
-      navigate("admin//sign_in")
+
+  // ✅ Prevents infinite redirects (missing dependency array before)
+  useEffect(() => {
+    if (!user || !user.token) {
+      navigate("/admin/sign_in"); // 👈 fixed double slash
     }
-  })
-  // ✅ Fetch user data WITH React Query
-  const { data, isLoading, error } = useQuery({
+  }, [user, navigate]);
+
+  // ✅ Fetch user data with React Query
+  const {
+    data,
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: ["userData", user?.token],
     queryFn: () => getUserData(user!.token),
-    enabled: !!user?.token,
+    enabled: !!user?.token, // Runs only when token exists
   });
 
-  // ✅ Clean computed data
-  const userData = data?.users || null;
+  // ✅ Ensure fallback for missing data
+  const userData = Array.isArray(data?.users) ? data.users : [];
+
+  
+
   return (
     <>
       {/* Notification */}
@@ -68,28 +78,49 @@ export const AdminDash = () => {
         <Sidebar name={userData?.name || ""} image={userData?.image || Yakub} login={()=>{}} />
           <MobileFooterNav/>
         {/* Main Content */}
-        <main className="flex-1 mt-5 md:mt-8 lg:mt-0 w-full px-6 lg:px-10 pt-5 pb-10">
+        <main className="flex-1 mt-5 md:mt-8 lg:mt-0 w-full  pb-10">
+          <div className="bg-white pt-2">
+            <p>Dashboard</p>
+          </div>
           {/* Header */}
-          <div className="flex justify-between items-center  px-5 py-5 mb-5 rounded-[8px]">
-            <h1 className="text-2xl lg:text-3xl font-semibold">
-              Welcome {userData?.preferedName || "Admin"}
+          <div className="flex justify-between items-center  px-5 py-2 mb-5 rounded-[8px]">
+            <h1 className="text-xl lg:text-2xl font-semibold">
+              Welcome back {userData?.preferedName || "Admin"}
             </h1>
             <button onClick={() => setShowNotify(true)}>
               <FaBell size={28} className="text-gray-600" />
             </button>
           </div>      
-<p className="text-[36px] font-[600] mb-4">Overview</p>
-
-<section className="flex flex-col md:flex-row justify-center gap-5 items-start">
+<p className="px-3 font-[600]">Events</p>
+<div className="flex gap-3 py-4 marquee2 px-3">
+  {
+    ['pwky 1.0', 'pwky 2.0', 'pwky 3.0', 'pwky 4.0', 'pwky 5.0'].map(item => (
+      <div className="bg-white w-[300px] px-6 gap-3 flex flex-col py-3">
+        <p className="flex justify-between">
+          <span>{item}</span>
+          <span className="text-[12px] items-center flex gap-3">View stats <FaEye/></span>
+        </p>
+        <p className="flex items-center">
+          <span className="text-xl">1,200</span>
+        </p>
+        <p className="flex gap-2 text-[10px]">
+          <span className="text-green-600 flex gap-2">12% <FaArrowUp/> </span>
+          <span>from last event</span>
+        </p>
+      </div>
+    ))
+  }
+</div>
+<section className="flex flex-col md:flex-row justify-center gap-5 items-start px-5">
   {/* Pie Chart */}
-  <div className="w-full md:w-1/2 bg-white rounded-[8px] p-5 shadow-md">
+  <div className="w-full md:w-1/3 bg-white rounded-[8px] p-5 shadow-md">
     <div className="relative w-full h-[300px] ">
       <PieChart />
     </div>
   </div>
 
   {/* Bar Chart */}
-  <div className="w-full md:w-1/2 bg-white rounded-[8px] p-5 shadow-md">
+  <div className="w-full bg-white rounded-[8px] p-1 shadow-md">
     <div className="relative w-full h-[300px]">
       <BarChart />
     </div>
@@ -135,7 +166,7 @@ export const AdminDash = () => {
         </thead>
 
         <tbody>
-          {userData.map((user: any, i: number) => (
+          {userData?.map((user: any, i: number) => (
             <tr
               key={i}
               className={`${
@@ -145,7 +176,7 @@ export const AdminDash = () => {
               <td className="px-4 py-3">{i + 1}</td>
               <td className="px-4 py-3 capitalize">{user.name || "N/A"}</td>
               <td className="px-4 py-3 capitalize">{user.gender || "N/A"}</td>
-              <td className="px-4 py-3 capitalize">{user.lga || "N/A"}</td>
+              <td className="px-4 py-3 capitalize">{user.LGA || "N/A"}</td>
               <td className="px-4 py-3 text-gray-500">
                 {user.createdAt
                   ? new Date(user.createdAt).toLocaleDateString()
@@ -160,7 +191,7 @@ export const AdminDash = () => {
 </section>
 
               {/* Profile Section */}
-              <section className="flex flex-col lg:flex-row gap-10 mt-10">
+              <section className="flex flex-col lg:flex-row gap-10 mt-10 pb-20">
 
 
                 <div className="bg-white rounded-lg p-6 w-full lg:w-1/3 shadow">

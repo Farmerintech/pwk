@@ -25,6 +25,8 @@ export const data = {
 };
 export const options = {
   responsive: true,
+    maintainAspectRatio: false, // ✅ allows height control via container
+
   plugins: {
     legend: {
       position: "top" as const,

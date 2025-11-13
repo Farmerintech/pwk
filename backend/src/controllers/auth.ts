@@ -160,6 +160,7 @@ export const adminLogin = async (req: Request, res: Response) => {
     const payload = {
       id: admin.id,
       role: "admin",
+      status:admin.status
     };
 
     const token = jwt.sign(payload, ENV.JWT_SECRET, {
