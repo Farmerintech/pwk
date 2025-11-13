@@ -1,4 +1,4 @@
-import { FaArrowLeft, FaArrowUp, FaBell, FaEye, FaUser } from "react-icons/fa";
+import { FaArrowUp, FaBell, FaEye, } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Notify } from "../notifications";
@@ -54,7 +54,7 @@ export const AdminDash = () => {
   // ✅ Ensure fallback for missing data
   const userData = Array.isArray(data?.users) ? data.users : [];
 
-  
+
 
   return (
     <>
@@ -75,8 +75,8 @@ export const AdminDash = () => {
 
       <div className="flex flex-col md:flex-row min-h-screen bg-gray-50 text-gray-900">
         {/* Sidebar */}
-        <Sidebar name={userData?.name || ""} image={userData?.image || Yakub} login={()=>{}} />
-          <MobileFooterNav/>
+        <Sidebar name={userData?.name || ""} image={userData?.image || Yakub} login={() => { }} />
+        <MobileFooterNav />
         {/* Main Content */}
         <main className="flex-1 mt-5 md:mt-8 lg:mt-0 w-full  pb-10">
           <div className="bg-white pt-2">
@@ -90,43 +90,43 @@ export const AdminDash = () => {
             <button onClick={() => setShowNotify(true)}>
               <FaBell size={28} className="text-gray-600" />
             </button>
-          </div>      
-<p className="px-3 font-[600]">Events</p>
-<div className="flex gap-3 py-4 marquee2 px-3">
-  {
-    ['pwky 1.0', 'pwky 2.0', 'pwky 3.0', 'pwky 4.0', 'pwky 5.0'].map(item => (
-      <div className="bg-white w-[300px] px-6 gap-3 flex flex-col py-3">
-        <p className="flex justify-between">
-          <span>{item}</span>
-          <span className="text-[12px] items-center flex gap-3">View stats <FaEye/></span>
-        </p>
-        <p className="flex items-center">
-          <span className="text-xl">1,200</span>
-        </p>
-        <p className="flex gap-2 text-[10px]">
-          <span className="text-green-600 flex gap-2">12% <FaArrowUp/> </span>
-          <span>from last event</span>
-        </p>
-      </div>
-    ))
-  }
-</div>
-<section className="flex flex-col md:flex-row justify-center gap-5 items-start px-5">
-  {/* Pie Chart */}
-  <div className="w-full md:w-1/3 bg-white rounded-[8px] p-5 shadow-md">
-    <div className="relative w-full h-[300px] ">
-      <PieChart />
-    </div>
-  </div>
+          </div>
+          <p className="px-3 font-[600]">Events</p>
+          <div className="flex gap-3 py-4 marquee2 px-3">
+            {
+              ['pwky 1.0', 'pwky 2.0', 'pwky 3.0', 'pwky 4.0', 'pwky 5.0'].map(item => (
+                <div className="bg-white w-[300px] px-6 gap-3 flex flex-col py-3">
+                  <p className="flex justify-between">
+                    <span>{item}</span>
+                    <span className="text-[12px] items-center flex gap-3">View stats <FaEye /></span>
+                  </p>
+                  <p className="flex items-center">
+                    <span className="text-xl">1,200</span>
+                  </p>
+                  <p className="flex gap-2 text-[10px]">
+                    <span className="text-green-600 flex gap-2">12% <FaArrowUp /> </span>
+                    <span>from last event</span>
+                  </p>
+                </div>
+              ))
+            }
+          </div>
+          <section className="flex flex-col md:flex-row justify-center gap-5 items-start px-5">
+            {/* Pie Chart */}
+            <div className="w-full md:w-1/3 bg-white rounded-[8px] p-5 shadow-md">
+              <div className="relative w-full h-[300px] ">
+                <PieChart />
+              </div>
+            </div>
 
-  {/* Bar Chart */}
-  <div className="w-full bg-white rounded-[8px] p-1 shadow-md">
-    <div className="relative w-full h-[300px]">
-      <BarChart />
-    </div>
-  </div>
-</section>
-          
+            {/* Bar Chart */}
+            <div className="w-full bg-white rounded-[8px] p-1 shadow-md">
+              <div className="relative w-full h-[300px]">
+                <BarChart />
+              </div>
+            </div>
+          </section>
+
           {/* Loading */}
           {isLoading && (
             <div className="mt-10 text-center text-gray-400 animate-pulse">
@@ -145,50 +145,49 @@ export const AdminDash = () => {
           {!isLoading && !error && (
             <>
               {/* <UserStatusChart /> */}
-<section className="bg-white mt-10 p-6 rounded-lg shadow-md">
-  <p className="text-lg font-semibold mb-6">User Data Overview</p>
+              <section className="bg-white mt-10 p-6 rounded-lg shadow-md">
+                <p className="text-lg font-semibold mb-6">User Data Overview</p>
 
-  <div className="overflow-x-auto pb-4">
-    {userData?.length === 0 ? (
-      <p className="text-gray-400 text-center py-5">
-        No user data found.
-      </p>
-    ) : (
-      <table className="min-w-full text-sm text-left border border-gray-200 rounded-lg overflow-hidden">
-        <thead className="bg-gray-100 text-gray-700">
-          <tr>
-            <th className="px-4 py-3 font-medium">#</th>
-            <th className="px-4 py-3 font-medium">Name</th>
-            <th className="px-4 py-3 font-medium">Gender</th>
-            <th className="px-4 py-3 font-medium">LGA</th>
-            <th className="px-4 py-3 font-medium">Date Added</th>
-          </tr>
-        </thead>
+                <div className="overflow-x-auto pb-4">
+                  {userData?.length === 0 ? (
+                    <p className="text-gray-400 text-center py-5">
+                      No user data found.
+                    </p>
+                  ) : (
+                    <table className="min-w-full text-sm text-left border border-gray-200 rounded-lg overflow-hidden">
+                      <thead className="bg-gray-100 text-gray-700">
+                        <tr>
+                          <th className="px-4 py-3 font-medium">#</th>
+                          <th className="px-4 py-3 font-medium">Name</th>
+                          <th className="px-4 py-3 font-medium">Gender</th>
+                          <th className="px-4 py-3 font-medium">LGA</th>
+                          <th className="px-4 py-3 font-medium">Date Added</th>
+                        </tr>
+                      </thead>
 
-        <tbody>
-          {userData?.map((user: any, i: number) => (
-            <tr
-              key={i}
-              className={`${
-                i % 2 === 0 ? "bg-white" : "bg-gray-50"
-              } border-b border-gray-100 hover:bg-gray-100`}
-            >
-              <td className="px-4 py-3">{i + 1}</td>
-              <td className="px-4 py-3 capitalize">{user.name || "N/A"}</td>
-              <td className="px-4 py-3 capitalize">{user.gender || "N/A"}</td>
-              <td className="px-4 py-3 capitalize">{user.LGA || "N/A"}</td>
-              <td className="px-4 py-3 text-gray-500">
-                {user.createdAt
-                  ? new Date(user.createdAt).toLocaleDateString()
-                  : "N/A"}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    )}
-  </div>
-</section>
+                      <tbody>
+                        {userData?.map((user: any, i: number) => (
+                          <tr
+                            key={i}
+                            className={`${i % 2 === 0 ? "bg-white" : "bg-gray-50"
+                              } border-b border-gray-100 hover:bg-gray-100`}
+                          >
+                            <td className="px-4 py-3">{i + 1}</td>
+                            <td className="px-4 py-3 capitalize">{user.name || "N/A"}</td>
+                            <td className="px-4 py-3 capitalize">{user.gender || "N/A"}</td>
+                            <td className="px-4 py-3 capitalize">{user.LGA || "N/A"}</td>
+                            <td className="px-4 py-3 text-gray-500">
+                              {user.createdAt
+                                ? new Date(user.createdAt).toLocaleDateString()
+                                : "N/A"}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  )}
+                </div>
+              </section>
 
               {/* Profile Section */}
               <section className="flex flex-col lg:flex-row gap-10 mt-10 pb-20">
