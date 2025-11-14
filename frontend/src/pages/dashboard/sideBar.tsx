@@ -55,11 +55,11 @@ export const Sidebar = ({ name, image }:ISide_Bar) => {
             key={item.name}
             onClick={() => setActive(item.path)}
             className={`
-              flex items-center justify-center gap-4 px-3 py-3 rounded-lg transition 
+              flex items-center gap-4 px-3 py-3 rounded-lg transition 
               ${active === item.path ? "bg-green-700 text-white" : "text-gray-800 hover:bg-gray-100"}
             `}
           >
-            {item?.icon}
+            <span className="text-centet">{item?.icon}</span>
 
             {/* hide text when collapsed */}
             <span
