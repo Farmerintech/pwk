@@ -33,7 +33,7 @@ export const Sidebar = ({ name, image }:ISide_Bar) => {
   return (
     <aside
       className={`
-        fixed top-0 left-0 h-screen bg-white shadow-lg z-50
+        fixed top-0 left-0 md:h-screen bg-white shadow-lg z-50
         flex flex-col justify-between overflow-y-auto transition-all duration-300
         ${open ? "w-64 h-[full]" : "w-[60px] h-[30px]"} 
         md:w-64  /* always full on desktop */
