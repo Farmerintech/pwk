@@ -189,21 +189,35 @@
   }
 }
 
+/* 🚫 Prevent unwanted horizontal scroll globally */
+html, body {
+  overflow-x: hidden;
+}
+
+/* ✅ Marquee fix */
 .marquee2 {
   display: flex;
-  flex-wrap: nowrap;
+  gap: 2rem;
   width: max-content;
   animation: marquee2 60s linear infinite;
 }
 
 @keyframes marquee2 {
-  from {
-    transform: translateX(-50%);
-  }
-  to {
+  0% {
     transform: translateX(0);
   }
+  100% {
+    transform: translateX(-50%);
+  }
 }
+
+/* ✅ Ensure child divs don’t stretch beyond parent */
+.marquee2 > div {
+  flex-shrink: 0;
+  width: 250px;
+  max-width: 90vw;
+}
+
 
 :root {
   --star-count: 1500;

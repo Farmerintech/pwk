@@ -65,10 +65,10 @@ export const Dash = () => {
 
       <div className="flex flex-col md:flex-row min-h-screen bg-gray-50 text-gray-900">
         {/* Sidebar */}
-        <Sidebar name={userData?.name || ""} image={userData?.image || Yakub} login={()=>{}} />
+        <Sidebar name={userData?.name || ""} image={userData?.image || Yakub}  />
           <MobileFooterNav/>
         {/* Main Content */}
-        <main className="flex-1 mt-5 md:mt-8 lg:mt-0 w-full px-6 lg:px-10 py-10">
+        <main className="flex-1 mt-5 md:mt-8 lg:mt-0 w-full px-6 lg:px-10 py-10 md:ml-[25%]">
           {/* Header */}
           <div className="flex justify-between items-center">
             <h1 className="text-2xl lg:text-3xl font-semibold">
@@ -231,6 +231,7 @@ export const Dash = () => {
                       
                     </div>
                   </div>
+                  
                 </div>
 
                 <div className="bg-white rounded-lg p-6 w-full lg:w-1/3 shadow">

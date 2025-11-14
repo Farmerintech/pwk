@@ -1,4 +1,3 @@
-// Sidebar component
 import {
   MdDashboard,
   MdPerson,
@@ -7,15 +6,11 @@ import {
   MdSettings,
   MdSupport,
   MdLogout,
+  MdMenu,
 } from "react-icons/md";
-import {  useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-interface ISide_Bar {
-  name: string;
-  image: string;
-  login: Function;
-}
 const navItems = [
   { name: "Dashboard", icon: <MdDashboard size={24} />, path: "dashboard" },
   { name: "Identity", icon: <MdPerson size={24} />, path: "identity" },
@@ -24,63 +19,97 @@ const navItems = [
   { name: "Settings", icon: <MdSettings size={24} />, path: "settings" },
   { name: "Support", icon: <MdSupport size={24} />, path: "support" },
 ];
-export const Sidebar = ({ name, image}: ISide_Bar) => {
+interface ISide_Bar {
+  name: string;
+  image: string;
+}
+export const Sidebar = ({ name, image }:ISide_Bar) => {
   const [active, setActive] = useState("dashboard");
+  const [open, setOpen] = useState(false); // mobile toggle
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    navigate("/");
-  };
+  const handleLogout = () => navigate("/");
 
   return (
-    <aside className="hidden md:flex md:flex-col pt-5 bg-white text-gray-900 w-[260px] z-100 h-screen sticky top-0 left-0 shadow-lg">
-      <div>
-        {/* <div className="flex items-center gap-4 px-6 py-6">
-          <img src={Logo} className="w-[48px] h-[48px] rounded-full" alt="Logo" />
-          <p className="text-[20px] font-semibold text-gray-800">QUEBEC</p>
-        </div> */}
+    <aside
+      className={`
+        fixed top-0 left-0 h-screen bg-white shadow-lg z-50
+        flex flex-col justify-between overflow-y-auto transition-all duration-300
+        ${open ? "w-64" : "w-[60px]"} 
+        md:w-64  /* always full on desktop */
+      `}
+    >
+      {/* Toggle Button (only mobile) */}
+      <button
+        className="md:hidden absolute top-4 right-3 text-gray-700"
+        onClick={() => setOpen(!open)}
+      >
+        <MdMenu size={26} />
+      </button>
 
-        <nav className="mt-4 px-5">
-          {navItems.map((item) => (
-            <Link
-              to={`/${item.path}`}
-              key={item.name}
-              onClick={() => setActive(item.path)}
-              className={`flex items-center gap-4 rounded-md px-4 py-3 transition-all ${
-                active === item.path
-                  ? "bg-green-700 text-white"
-                  : "text-gray-700 hover:bg-gray-100"
-              }`}
+      {/* NAV ITEMS */}
+      <nav className="mt-14 px-3">
+        {navItems.map((item) => (
+          <Link
+            to={`/${item.path}`}
+            key={item.name}
+            onClick={() => setActive(item.path)}
+            className={`
+              flex items-center justify-center gap-4 px-3 py-3 rounded-lg transition 
+              ${active === item.path ? "bg-green-700 text-white" : "text-gray-800 hover:bg-gray-100"}
+            `}
+          >
+            {item?.icon}
+
+            {/* hide text when collapsed */}
+            <span
+              className={`
+                text-[15px] font-medium whitespace-nowrap transition-all
+                ${open ? "opacity-100 ml-1" : "opacity-0 w-0 overflow-hidden"}
+                md:opacity-100 md:w-auto md:ml-1
+              `}
             >
-              {item.icon}
-              <span className="text-[16px] font-medium">{item.name}</span>
-            </Link>
-          ))}
-        </nav>
-      </div>
+              {item.name}
+            </span>
+          </Link>
+        ))}
+      </nav>
 
-      <div className="px-6 pb-6 mt-auto">
-        <div className="flex items-center gap-3 mb-4">
+      {/* USER SECTION */}
+      <div className="px-4 py-6 border-t border-gray-100">
+        <div
+          className={`
+            flex items-center gap-3 mb-4 transition-all
+            ${open ? "opacity-100" : "opacity-0 w-0 overflow-hidden md:opacity-100 md:w-auto"}
+          `}
+        >
           <img
             src={image}
             alt="User"
-            className="w-[32px] h-[32px] rounded-full object-cover border border-gray-300"
+            className="w-9 h-9 rounded-full object-cover border"
           />
-          <p className="text-[15px] font-medium text-gray-800">{name}</p>
+          <p className="font-medium text-gray-900">{name}</p>
         </div>
 
-        <div
-          className="flex items-center gap-3 text-red-500 cursor-pointer hover:text-red-600 transition"
+        <button
           onClick={handleLogout}
+          className="flex items-center gap-3 text-red-500 hover:text-red-600"
         >
           <MdLogout size={20} />
-          <span className="text-[15px] font-medium">Log Out</span>
-        </div>
+
+          <span
+            className={`
+              transition-all
+              ${open ? "opacity-100" : "opacity-0 w-0 overflow-hidden md:opacity-100 md:w-auto"}
+            `}
+          >
+            Log Out
+          </span>
+        </button>
       </div>
     </aside>
   );
 };
-
 // Mobile Footer Nav
 const mobileNavItems = [
   { name: "Dashboard", icon: <MdDashboard size={24} />, path: "dashboard" },
