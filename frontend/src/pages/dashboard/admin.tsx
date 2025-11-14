@@ -81,7 +81,7 @@ export const AdminDash = () => {
     {/** All main content here */}
  
           {/* Header */}
-          <div className="bg-white pt-5 flex justify-between items-center px-5">
+          <div className="bg-white pt-5 flex justify-center gap-8 md:justify-between items-center px-5">
             <p className="font-[600] py-2">Dashboard</p>
             <button onClick={() => setShowNotify(true)}>
               <FaBell size={20} className="text-gray-600" />
