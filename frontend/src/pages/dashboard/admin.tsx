@@ -67,7 +67,7 @@ export const AdminDash = () => {
 <aside
     className={`
       fixed md:relative inset-y-0 left-0 bg-white shadow-md z-50
-      w-[60px] md:w-[250px] transition-all duration-300
+      md:w-[250px] transition-all duration-300
     `}
   >    <Sidebar 
       name={userData?.name || ""} 
@@ -77,7 +77,7 @@ export const AdminDash = () => {
   </aside>
 {/* <MobileFooterNav/> */}
   {/* Main */}
-  <main className="md:w-full md:overflow-x-hidden ml-[60px] md:ml-0">
+  <main className="md:w-full md:overflow-x-hidden md:ml-0">
     {/** All main content here */}
  
           {/* Header */}
