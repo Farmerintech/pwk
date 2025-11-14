@@ -1,4 +1,4 @@
-import {
+theimport {
   MdDashboard,
   MdPerson,
   MdApps,
@@ -101,7 +101,7 @@ export const Sidebar = ({ name, image }: ISide_Bar) => {
       {/* Overlay for mobile when sidebar open */}
       {open && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-30 z-40 md:hidden"
+          className="fixed inset-0 bg-opacity-30 z-40 md:hidden"
           onClick={() => setOpen(false)}
         ></div>
       )}
