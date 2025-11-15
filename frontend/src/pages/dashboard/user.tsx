@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Notify } from "../notifications";
 import { useAuthStore } from "../../contexts/UserContext";
 import { useQuery } from "@tanstack/react-query";
-import { MobileFooterNav, Sidebar } from "./sideBar";
+import { Sidebar } from "./sideBar";
 import Yakub from "../../assets/yakub.jpg"
 
 export const getUserData = async (token: string) => {
@@ -63,20 +63,34 @@ export const Dash = () => {
         </div>
       )}
 
-      <div className="flex flex-col md:flex-row min-h-screen bg-gray-50 text-gray-900">
-        {/* Sidebar */}
-        <Sidebar name={userData?.name || ""} image={userData?.image || Yakub}  />
-          <MobileFooterNav/>
-        {/* Main Content */}
-        <main className="flex-1 mt-5 md:mt-8 lg:mt-0 w-full px-6 lg:px-10 py-10 md:ml-[25%]">
+<div className="min-h-screen grid grid-cols-1 md:grid-cols-[250px_1fr] bg-gray-50">
+  
+  {/* Sidebar */}
+<aside
+    className={`
+      fixed md:relative inset-y-0 left-0 bg-white  z-50
+      md:w-[250px] transition-all duration-300
+    `}
+  >    <Sidebar 
+      name={userData?.name || ""} 
+      image={userData?.image || Yakub} 
+      
+    />
+  </aside>
+{/* <MobileFooterNav/> */}
+  {/* Main */}
+  <main className="md:w-full md:overflow-x-hidden md:ml-0">
+    {/** All main content here */}
           {/* Header */}
-          <div className="flex justify-between items-center">
-            <h1 className="text-2xl lg:text-3xl font-semibold">
-              Welcome {userData?.preferedName || "User"}
-            </h1>
+          <div className="bg-white pt-5 py-2 flex justify-end gap-8 md:justify-end items-center px-5">
             <button onClick={() => setShowNotify(true)}>
-              <FaBell size={28} className="text-gray-600" />
+              <FaBell size={20} className="text-gray-600" />
             </button>
+          </div>
+          <div className="flex justify-between items-center px-5 py-2 mb-5">
+            <h1 className="text-xl lg:text-2xl font-semibold">
+              Welcome back {userData?.preferedName || "Guest"}
+            </h1>
           </div>
           {/* Loading */}
           {isLoading && (
@@ -98,7 +112,7 @@ export const Dash = () => {
               {/* <UserStatusChart /> */}
 
               {/* Profile Section */}
-              <section className="flex flex-col lg:flex-row gap-10 mt-10">
+              <section className="flex flex-col lg:flex-row gap-10 mt-10 px-5 pb-8">
                 <div className="bg-white rounded-lg p-6 flex-1 shadow">
                   <div className="flex justify-between mb-6">
                     <div>
