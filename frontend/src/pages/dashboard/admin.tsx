@@ -66,8 +66,8 @@ export const AdminDash = () => {
   {/* Sidebar */}
 <aside
     className={`
-      fixed md:relative inset-y-0 left-0 bg-white shadow-md z-50
-      w-[60px] md:w-[250px] transition-all duration-300
+      fixed md:relative inset-y-0 left-0 bg-white  z-50
+      md:w-[250px] transition-all duration-300
     `}
   >    <Sidebar 
       name={userData?.name || ""} 
@@ -77,12 +77,11 @@ export const AdminDash = () => {
   </aside>
 {/* <MobileFooterNav/> */}
   {/* Main */}
-  <main className="md:w-full md:overflow-x-hidden ml-[60px] md:ml-0">
+  <main className="md:w-full md:overflow-x-hidden md:ml-0">
     {/** All main content here */}
  
           {/* Header */}
-          <div className="bg-white pt-5 flex justify-between items-center px-5">
-            <p className="font-[600] py-2">Dashboard</p>
+          <div className="bg-white pt-5 py-2 flex justify-end gap-8 md:justify-end items-center px-5">
             <button onClick={() => setShowNotify(true)}>
               <FaBell size={20} className="text-gray-600" />
             </button>
