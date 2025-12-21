@@ -1,105 +1,121 @@
-import Hero from "../../assets/tennisball.png";
-import Hero2 from "../../assets/scrabble1.jpg";
-import Hero1 from "../../assets/football.png";
-import Hero3 from "../../assets/ludo.jpg";
-import Hero4 from "../../assets/basketball.jpg";
-import Hero5 from "../../assets/dice.png";
-
-export const HeroSection = () => {
-  return (
-    <section className="relative w-full overflow-hidden bg-gray-50">
-      <HeroSection3 />
-    </section>
-  );
-};
-import { useEffect, useRef, useState } from "react";
+import { FaChevronRight } from "react-icons/fa";
 
 export const HeroSection3 = () => {
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef(null);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => setIsVisible(entry.isIntersecting),
-      { threshold: 0.3 }
-    );
-
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
-  }, []);
-
-  const baseImgClass =
-    "w-[60px] h-[60px] md:w-[120px] md:h-[120px] transform border-4 border-green-500 absolute transition-all duration-[1200ms] ease-out rounded-xl shadow-md bg-white";
 
   return (
     <div
-      ref={sectionRef}
-      className="relative flex flex-col items-center justify-center mt-20 h-[500px] md:h-[700px] px-4 md:px-20 overflow-hidden"
+      
+      className="relative h-full flex flex-col justify-between px-5 md:px-12"
     >
-      {/* Floating Images */}
-      <img
-        src={Hero1}
-        alt="Football"
-        className={`${baseImgClass} ${
-          isVisible
-            ? "md:left-[10%] xl:left-[20%] left-[15%] top-[15%] xl:top-[20%] rotate-[-25deg]"
-            : "left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-        }`}
-      />
-
-      <img
-        src={Hero2}
-        alt="Scrabble"
-        className={`${baseImgClass} ${
-          isVisible
-            ? "md:right-[10%] right-[15%] xl:right-[20%] top-[20%] xl:top-[25%] rotate-[25deg]"
-            : "left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-        }`}
-      />
-
-      <img
-        src={Hero3}
-        alt="Ludo"
-        className={`${baseImgClass} ${
-          isVisible
-            ? "md:left-[8%] left-[10%] xl:left-[20%] bottom-[25%] rotate-[-65deg]"
-            : "left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-        }`}
-      />
-
-      <img
-        src={Hero4}
-        alt="Basketball"
-        className={`${baseImgClass} ${
-          isVisible
-            ? "md:right-[8%] right-[10%] xl:right-[20%] bottom-[25%] rotate-[65deg]"
-            : "left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-        }`}
-      />
-
-      <img
-        src={Hero5}
-        alt="Dice"
-        className={`${baseImgClass} ${
-          isVisible ? "left-[45%] top-[5%] rotate-[45deg]" : "left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-        }`}
-      />
-
-      <img
-        src={Hero}
-        alt="Tennis Ball"
-        className={`${baseImgClass} ${
-          isVisible ? "right-[45%] bottom-[5%] rotate-[-60deg]" : "left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-        }`}
-      />
-
-      {/* Hero Text */}
-      <div className="text-center max-w-[90%] md:max-w-[65%] lg:px-20 z-20 mt-6">
-        <p className="text-[28px] sm:text-[28px] md:text-[40px] xl:text-[52px] font-semibold leading-tight text-gray-800">
+      {/* ================= TEXT ================= */}
+      <div className="pt-28 md:pt-40 max-w-4xl">
+        <p className="text-left text-[26px] sm:text-[32px] md:text-[44px] xl:text-[52px]
+          font-semibold leading-tight text-white md:max-w-[400px] lg:max-w-[600px]">
           Uniting Kwara Youths Through Sports,{" "}
-          <span className="text-green-600">Creativity</span> & Purpose.
+          <span className="text-blue-400">Creativity</span> & Purpose.
         </p>
+
+        {/* CTA */}
+        <div className="flex gap-4 mt-6 flex-col md:flex-row ">
+          <button className="
+            bg-white text-black px-4 py-3 rounded-full
+            flex items-center justify-between md:justify-start gap-3 font-semibold text  
+          ">
+            <span>Get in touch</span>
+            <span className="bg-black text-white p-1 rounded-full">
+              <FaChevronRight size={12} />
+            </span>
+          </button>
+
+          <button className="
+            bg-black/30 text-white backdrop-blur-lg
+            px-4 py-3 rounded-full
+            flex items-center  justify-between md:justify-start gap-3 border border-white/10
+          ">
+            Read more
+            <FaChevronRight size={12} />
+          </button>
+        </div>
+      </div>
+
+      {/* ================= UPCOMING EVENTS ================= */}
+      <div className="
+        mt-10 md:mt-0 md:absolute md:right-12 md:top-40
+        w-full md:w-[320px]
+      ">
+        <div className="
+          bg-black/30 backdrop-blur-xl backdrop-saturate-150
+          border border-white/10 rounded-2xl
+          px-5 py-4 text-white
+        ">
+          <p className="font-semibold mb-4">Upcoming Events</p>
+
+          <div className="flex flex-col gap-4">
+            {/* Event Card */}
+            <div className="bg-white text-black rounded-xl p-4">
+              <div className="flex justify-between text-sm mb-3">
+                <span>Saturday</span>
+                <span className="text-gray-500">PWKY 5.0</span>
+              </div>
+
+              <div className="flex justify-between text-sm">
+                <div>
+                  <p className="text-gray-500">Start</p>
+                  <p>10:00am</p>
+                </div>
+                <p className="self-end">2hrs</p>
+                <div>
+                  <p className="text-gray-500">End</p>
+                  <p>6:00pm</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Event Card */}
+            <div className="bg-white text-black rounded-xl p-4">
+              <div className="flex justify-between text-sm mb-3">
+                <span>Saturday</span>
+                <span className="text-gray-500">PWKY Dinner</span>
+              </div>
+
+              <div className="flex justify-between text-sm">
+                <div>
+                  <p className="text-gray-500">Start</p>
+                  <p>10:00am</p>
+                </div>
+                <p className="self-end">2hrs</p>
+                <div>
+                  <p className="text-gray-500">End</p>
+                  <p>6:00pm</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ================= IMAGE AREA (DESKTOP) ================= */}
+      <div className="hidden md:flex h-1/2 items-center justify-center">
+        {/* keep your floating images here */}
       </div>
     </div>
+  );
+};
+
+
+import wallpaper from "../../assets/wallpp.jpg";
+
+export const HeroSection = () => {
+  return (
+    <section
+      className="relative w-full h-[150vh] md:h-[100vh] bg-cover bg-center overflow-hidden"
+      style={{ backgroundImage: `url(${wallpaper})` }}
+    >
+      <div className="absolute inset-0 bg-black/50 z-0" />
+      <div className="relative z-10 h-full">
+        <HeroSection3 />
+      </div>
+    </section>
   );
 };

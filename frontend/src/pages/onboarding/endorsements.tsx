@@ -45,8 +45,8 @@ const endorsements = [
 
 export const Endorsements = () => {
   return (
-    <section className="bg-gray-50 py-16 px-5 md:px-10 xl:px-20 overflow-hidden">
-      <h2 className="text-center text-[20px] md:text-[36px] font-bold mb-12 text-gray-900">
+    <section className="bg-black py-16 mt-5 px-5 md:px-10 xl:px-20 overflow-hidden">
+      <h2 className="text-center text-[20px] md:text-[36px] font-bold mb-12 text-gray-50">
         What Influential People Say About Play With Kwara
       </h2>
 
@@ -67,19 +67,19 @@ export const Endorsements = () => {
 // ---------------- CARD (ENDORSEMENTS) ----------------
 
 const Card = ({ data }: any) => (
-  <div className="flex-shrink-0 w-[350px] md:w-[450px] flex flex-col bg-white p-6 rounded-2xl border border-gray-200 shadow-sm">
+  <div className="flex-shrink-0 w-[350px] md:w-[450px] flex flex-col bg-black/50 p-6 rounded-2xl border border-white/10 shadow-sm">
     <div className="flex items-center gap-5">
       <img
         src={data.image}
         className="w-[80px] h-[80px] rounded-xl border border-gray-200 object-cover"
       />
       <div>
-        <h3 className="font-semibold text-lg text-gray-900">{data.name}</h3>
-        <p className="text-gray-500 text-sm">{data.title}</p>
+        <h3 className="font-semibold text-lg text-white">{data.name}</h3>
+        <p className="text-gray-50 text-sm">{data.title}</p>
       </div>
     </div>
 
-    <p className="mt-4 text-gray-700 italic text-sm leading-relaxed">
+    <p className="mt-4 text-gray-400 italic text-sm leading-relaxed">
       “{data.message}”
     </p>
   </div>
@@ -128,11 +128,11 @@ const Fireworks = () => {
 
 export const HallOfFame = () => {
   return (
-    <section className="bg-gray-50 text-gray-900 py-16 backdrop-blur-xl px-5 md:px-10 xl:px-20 overflow-hidden">
+    <section className="bg-black text-gray-900 py-16 backdrop-blur-xl px-5 md:px-10 xl:px-20 overflow-hidden">
       <div className="relative w-full">
         <Fireworks />
 
-        <h2 className="text-center text-[20px] md:text-[36px] font-bold mb-12">
+        <h2 className="text-center text-white text-[20px] md:text-[36px] font-bold mb-12">
           Play With Kwara Youths Hall of Fame
         </h2>
 
@@ -152,7 +152,7 @@ export const HallOfFame = () => {
 };
 
 const Card2 = ({ data }: any) => (
-  <div className="flex-shrink-0 w-[300px] flex flex-col bg-white border border-gray-200 p-0 rounded-2xl">
+  <div className="flex-shrink-0 w-[300px] flex flex-col bg-black/90 border border-white/10 p-0 rounded-2xl">
     <div className="flex flex-col items-start p-3 gap-4">
       <img
         src={data.image}
@@ -160,9 +160,9 @@ const Card2 = ({ data }: any) => (
       />
 
       <div className="pl-1">
-        <h3 className="font-semibold text-lg text-gray-900">{data.name}</h3>
-        <p className="text-green-600 text-sm">{data.nickName}</p>
-        <p className="text-gray-700 text-sm">{data.title}</p>
+        <h3 className="font-semibold text-lg text-gray-50">{data.name}</h3>
+        <p className="text-gray-400 text-sm">{data.nickName}</p>
+        <p className="text-gray-400 text-sm">{data.title}</p>
       </div>
     </div>
   </div>

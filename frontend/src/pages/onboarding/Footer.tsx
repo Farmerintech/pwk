@@ -51,7 +51,7 @@ export const Footer = () => {
       <div className="border-t border-gray-300 mt-10 pt-6 text-center text-sm text-gray-600">
         <p>© {new Date().getFullYear()} PWKY. All rights reserved.</p>
         <p className="mt-2 text-gray-700">
-          <span className="font-semibold text-green-500">PWKY</span> Sports ⚡
+          <span className="font-semibold text-orange-500">PWKY</span> Sports ⚡
         </p>
       </div>
     </footer>

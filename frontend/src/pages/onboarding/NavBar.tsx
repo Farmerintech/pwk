@@ -1,98 +1,122 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { FaTimes } from "react-icons/fa";
-import { MdGridView } from "react-icons/md";
+import { FaBars, FaTimes, FaChevronRight } from "react-icons/fa";
 import { useAuthStore } from "../../contexts/UserContext";
+import PWKYLOGO from "../../assets/pwkylogo.jpg";
 
 export const NavBar = () => {
-// const { address, isConnected } = useAccount();
-// State renamed for clarity
-const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); 
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const user = useAuthStore((state) => state.user);
 
-   const user = useAuthStore((state) => state.user);
+  return (
+    <>
+      {/* ================= NAV BAR ================= */}
+      <nav className="fixed top-0 left-0 w-full z-50">
+        <div className="
+          mx-4 mt-4 flex items-center justify-between
+          rounded-full px-4 py-2
+          bg-black/30 backdrop-blur-xl backdrop-saturate-150
+          border border-white/10
+        ">
+          {/* Logo */}
+          <div className="flex items-center gap-2">
+            <img
+              src={PWKYLOGO}
+              alt="PWKY"
+              className="w-8 h-8 rounded-full"
+            />
+            <span className="text-white font-semibold text-sm hidden sm:block">
+              PWKY
+            </span>
+          </div>
 
+          {/* Desktop Links */}
+          <ul className="hidden md:flex items-center gap-8 text-white font-semibold">
+            <li><Link to="/">Home</Link></li>
+            <li>
+              {user?.role ? (
+                <Link to={`/${user.role}/dashboard`}>Dashboard</Link>
+              ) : (
+                <Link to="/sign_in">Dashboard</Link>
+              )}
+            </li>
+            <li><Link to="/sign_up/user">Sign Up</Link></li>
+            <li><Link to="/sign_in">Sign In</Link></li>
+            <li className="px-4 py-2 rounded-full bg-blue-700 hover:bg-blue-800 transition">
+              <Link to="/blog">Blog</Link>
+            </li>
+          </ul>
 
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden text-white p-2"
+            onClick={() => setIsMobileMenuOpen(true)}
+          >
+            <FaBars size={18} />
+          </button>
+        </div>
+      </nav>
 
- // Function updated to toggle the menu state
- const handleNavToggle = () => {
-  setIsMobileMenuOpen(!isMobileMenuOpen);
- };
- 
+      {/* ================= MOBILE DRAWER ================= */}
+      <div
+        className={`
+          fixed top-0 right-0 h-full w-[85%] max-w-sm z-50
+          bg-black/40 backdrop-blur-2xl backdrop-saturate-150
+          border-l border-white/10
+          transform transition-transform duration-300
+          ${isMobileMenuOpen ? "translate-x-0" : "translate-x-full"}
+        `}
+      >
+        {/* Close */}
+        <div className="flex justify-end p-6">
+          <button onClick={() => setIsMobileMenuOpen(false)}>
+            <FaTimes size={18} className="text-white" />
+          </button>
+        </div>
 
- return (
-  <>
-   <nav className="bg-white backdrop-blur-xl font-[600] py-3  flex items-center justify-between px-5 md:px-10 lg:px-16 z-40">
-    {/* Left - Logo + Nav Links */}
-    <div>
-     <p className="text-[18px] text-">PLAY WITH KWARA YOUTH</p>
-    </div>
+        {/* Links */}
+        <ul className="flex flex-col gap-6 px-8 text-white text-lg font-semibold">
+          <li onClick={() => setIsMobileMenuOpen(false)}>
+            <Link to="/">Home</Link>
+          </li>
 
-    {/* ------------------ MOBILE & DESKTOP MENU ------------------ */}
-        {/* On mobile, it's conditionally fixed/hidden. On md/desktop, it's always flex. */}
-    <div className={`
-            ${isMobileMenuOpen 
-                ? 'fixed top-0 left-0 w-full h-screen bg-gray-50 flex flex-col pt-20 z-50' // Mobile Open Styles
-                : 'hidden'
-            } 
-            md:flex md:items-center md:gap-3 md:relative md:w-auto md:h-auto md:bg-transparent md:pt-0
-        `}>
-     
-     {/* The list of links */}
-     <ul className="flex flex-col md:flex-row gap-6 lg:gap-10 text-white font-medium px-10 md:p-0">
-      {/* Close Button - ONLY visible on mobile */}
-      <div onClick={() => { setIsMobileMenuOpen(false) }} className="absolute top-8 right-8 md:hidden hover:text-green-600 text-black  cursor-pointer">
-       <FaTimes size={20} />
+          <li onClick={() => setIsMobileMenuOpen(false)}>
+            {user?.role ? (
+              <Link to={`/${user.role}/dashboard`}>Dashboard</Link>
+            ) : (
+              <Link to="/sign_in">Dashboard</Link>
+            )}
+          </li>
+
+          <li onClick={() => setIsMobileMenuOpen(false)}>
+            <Link to="/sign_up/user">Sign Up</Link>
+          </li>
+
+          <li onClick={() => setIsMobileMenuOpen(false)}>
+            <Link to="/sign_in">Sign In</Link>
+          </li>
+
+          <li className="mt-6">
+            <Link
+              to="/blog"
+              className="flex items-center justify-between
+              bg-blue-700 hover:bg-blue-800 transition
+              px-5 py-3 rounded-full"
+            >
+              Blog
+              <FaChevronRight />
+            </Link>
+          </li>
+        </ul>
       </div>
 
-      <li onClick={() => { setIsMobileMenuOpen(false) }}>
-       <Link to="/" className="font-[600] hover:text-green-600 text-black transition">
-        Home
-       </Link>
-      </li>
-      <li onClick={() => { setIsMobileMenuOpen(false) }}>
-       {
-        user && user?.role !==null ?
-         (
-          <Link to={`/${user?.role}/dashboard`} className=" font-[600] hover:text-green-600 text-black  transition">
-           Dashboard
-          </Link>
-         ):(
-            <li onClick={() => { setIsMobileMenuOpen(false) }}>
-       <Link to="/sign_in" className="font-[600]  hover:text-green-600 text-black  transition">
-        Dashboard
-       </Link>
-      </li>
-         )
-       }
-      </li>
-      <li onClick={() => { setIsMobileMenuOpen(false) }}>
-       <Link to="/sign_up/user" className="font-[600]  hover:text-green-600 text-black  transition">
-        SignUp
-       </Link>
-      </li>
-    
-      <li onClick={() => { setIsMobileMenuOpen(false) }}>
-       <Link to="/sign_in" className="font-[600]  hover:text-green-600 text-black  transition">
-        SignIn
-       </Link>
-      </li>
-      <li>
-       <Link to="/sign_in" className="font-[600] md:hidden hover:text-green-600 text-black  transition">
-        Blog
-       </Link>
-      </li>
-     </ul>
-    </div>
-
-    <div className="hidden md:flex items-center gap-2 justify-center font-[600] hover:bg-green-700 bg-green-600 px-5 py-2 rounded-lg text-white">
-        Blog
-    </div>
-
-    {/* Right - Mobile Menu Icon - ONLY visible on mobile */}
-    <div className="text- md:hidden cursor-pointer z-40 font-[600] px-2 py-1 rounded-[2px]" onClick={handleNavToggle}>
-     <MdGridView size={25} />
-    </div>
-   </nav>
-  </>
- );
+      {/* Overlay */}
+      {isMobileMenuOpen && (
+        <div
+          className="fixed inset-0 bg-black/40 z-40"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+      )}
+    </>
+  );
 };

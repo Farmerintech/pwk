@@ -12,16 +12,16 @@ export const PWKGalleries = () => {
     Array.from({ length: 9 }, (_, i) => imageSources[i % imageSources.length]);
 
   const galleries = [
-    { title: "PWK 1 Gallery", photos: generatePhotos() },
-    { title: "PWK 2 Gallery", photos: generatePhotos() },
-    { title: "PWK 3 Gallery", photos: generatePhotos() },
-    { title: "PWK 4 Gallery", photos: generatePhotos() },
-    { title: "PWK 5 Gallery", photos: generatePhotos() },
+    { title: "PWK 1.0 Gallery", photos: generatePhotos() },
+    { title: "PWK 2.0 Gallery", photos: generatePhotos() },
+    { title: "PWK 3.0 Gallery", photos: generatePhotos() },
+    { title: "PWK 4.0 Gallery", photos: generatePhotos() },
+    { title: "PWK 5.0 Gallery", photos: generatePhotos() },
   ];
 
   return (
-    <section className="bg-gray-50 text-gray-900 py-16 px-5 md:px-10 xl:px-20 overflow-hidden">
-      <h2 className="text-center text-[28px] md:text-[36px] font-bold mb-10">
+    <section className="bg-black  py-16 px-5 md:px-10 xl:px-20 overflow-hidden">
+      <h2 className="text-center text-[28px] text-white md:text-[36px] font-bold mb-10">
         Our Galleries
       </h2>
 
@@ -44,8 +44,8 @@ const GalleryBox = ({ gallery }: any) => {
   return (
     <div
       className="
-        bg-white
-        border border-gray-200
+        bg-white/10
+        border border-black/80
         rounded-2xl
         p-4 shadow-sm
         
@@ -57,11 +57,11 @@ const GalleryBox = ({ gallery }: any) => {
       "
     >
       <h3 className="flex justify-between items-center">
-        <p className="font-semibold text-base md:text-lg mb-3 text-gray-900">
+        <p className="font-semibold text-base md:text-lg mb-3 text-white">
           {gallery.title}
         </p>
 
-        <p className="flex gap-2 items-center text-green-600 hover:text-green-700 transition">
+        <p className="flex gap-2 items-center text-gray-50 hover:text-green-700 transition">
           Explore <FaArrowRight />
         </p>
       </h3>
