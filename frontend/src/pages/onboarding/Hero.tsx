@@ -1,15 +1,29 @@
 import { FaChevronRight } from "react-icons/fa";
 
 export const HeroSection3 = () => {
+  const [index, setIndex] = useState<number>(1);
 
+useEffect(() => {
+  const interval = setInterval(() => {
+    setIndex(prev => (prev === 4 ? 1 : prev + 1));
+  }, 5000);
 
+  return () => clearInterval(interval);
+}, []);
+
+const messages = [
+  "Interesting games for all youths",
+  "State-of-the-art sports and entertainment",
+  "Interesting games that meet your goals",
+  "Proven track record of youth engagements",
+];
   return (
     <div
       
       className="relative h-full flex flex-col justify-between px-5 md:px-12"
     >
       {/* ================= TEXT ================= */}
-      <div className="pt-28 md:pt-40 max-w-4xl">
+      <div className="pt-28 md:pt-40 max-w-4xl md:pt-20">
         <p className="text-left text-[26px] sm:text-[32px] md:text-[44px] xl:text-[52px]
           font-semibold leading-tight text-white md:max-w-[400px] lg:max-w-[600px]">
           Uniting Kwara Youths Through Sports,{" "}
@@ -96,20 +110,45 @@ export const HeroSection3 = () => {
       </div>
 
       {/* ================= IMAGE AREA (DESKTOP) ================= */}
-      <div className="hidden md:flex h-1/2 items-center justify-center">
-        {/* keep your floating images here */}
-      </div>
+
+<div className="flex h-1/2 items-center justify-start text-white mt-5 mb-3">
+  {messages.map((text, i) => {
+    const step = i + 1;
+    const isActive = index === step;
+
+    return (
+      <p
+        key={step}
+        className={`
+          text-[14px] md:text-[16px]
+          ${isActive ? "text-white block" : "hidden md:block text-gray-400"}
+        `}
+      >
+        {text}
+      </p>
+    );
+  })}
+</div>
+
+<div className="bg-gray-400 w-full h-1 md:h-2 mb-5">
+  <div
+    className="h-full bg-white transition-all duration-300"
+    style={{ width: `${(index / 4) * 100}%` }}
+  />
+</div>
+
     </div>
   );
 };
 
 
 import wallpaper from "../../assets/wallpp.jpg";
+import { useEffect, useState } from "react";
 
 export const HeroSection = () => {
   return (
     <section
-      className="relative w-full h-[150vh] md:h-[100vh] bg-cover bg-center overflow-hidden"
+      className="relative w-full min-h-screen md:h-screen bg-cover bg-center overflow-hidden"
       style={{ backgroundImage: `url(${wallpaper})` }}
     >
       <div className="absolute inset-0 bg-black/50 z-0" />
