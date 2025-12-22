@@ -1,43 +1,46 @@
-import Jamil from "../../assets/jamil.jpg";
-import Mataya from "../../assets/matayas.jpg";
-import Haleemah from "../../assets/haleemah.jpg";
-import Yakub from "../../assets/yakub.jpg";
+
+import emir from "../../assets/emir.jpeg"
+import rahman from "../../assets/rahman.webp"
+import bolaji from "../../assets/bolaji.jpg"
+import saliu from "../../assets/saliu.jpeg"
+import tolani from "../../assets/tolani.webp"
+import hall1 from "../../assets/hall1.jpg"
+import hall2 from "../../assets/hall2.jpg"
+import hall3 from "../../assets/hall3.jpg"
+import hall4 from "../../assets/hall4.jpg"
+import hall5 from "../../assets/hall5.jpg"
 
 // ---------------- ENDORSEMENTS ----------------
 
 const endorsements = [
   {
-    name: "Governor AbdulRahman AbdulRazaq",
-    title: "Executive Governor, Kwara State",
-    image: Jamil,
-    message:
-      "Play With Kwara Youth is more than a sports event—it’s a movement that builds unity, passion, and purpose among our young people. I’m proud to support this vision that inspires the next generation of leaders.",
-  },
+    name: "Alhaji (Dr.) Ibrahim Sulu Gambari.",
+    title: "Emir of Ilorin",
+    image: emir,
+    message:"“Play With Kwara Youths is a commendable initiative that promotes unity, peace, and youth development across Kwara State. I am pleased with its vision and achievements and give it my royal blessings.” "
+    },
   {
     name: "Hon. Bola Magaji",
-    title: "Commissioner for Youth and Sports Development",
-    image: Mataya,
-    message:
-      "This initiative gives our youths a strong sense of belonging and showcases their potential. It aligns perfectly with our drive to empower young talents across Kwara State.",
+    title: "Former Commissioner for Youth and Sports Development",
+    image: bolaji,
+    message:"Play With Kwara Youths is a unifying, non-partisan initiative that strengthens togetherness among young people, and I am proud to be identified with its vision and growth."  },
+  {
+    name: "Governor AbdulRahman AbdulRazaq",
+    title: "Kwara State Governor",
+    image: rahman,
+    message:"“Play With Kwara Youths promotes unity, youth development, and active engagement, showcasing the impact of a shared platform that brings young people together.”  "
   },
   {
-    name: "Mallam Abdulrahman Olohungbebe",
-    title: "Community Development Advocate",
-    image: Yakub,
-    message:
-      "Play With Kwara Youth promotes inclusion, teamwork, and self-expression. It’s an example of what youth-led collaboration can achieve when given the right platform.",
-  },
-  {
-    name: "Mrs. Aisha Yusuf",
-    title: "Entrepreneur & Youth Mentor",
-    image: Haleemah,
+    name: "Hon. Muktar Tolani Shagaya",
+    title: "member representing Ilorin West/Asa at the House of Representatives",
+    image: tolani,
     message:
       "Seeing the enthusiasm and creativity this event brings is inspiring. It’s not just about sports — it’s about creating opportunities for every youth to shine.",
   },
   {
-    name: "Tunde Ahmed",
-    title: "Former National Footballer",
-    image: Yakub,
+    name: "Mallam Saliu Mustapha",
+    title: "Senator Representing Kwara Central",
+    image: saliu,
     message:
       "I’m proud to see Kwara youths using sports and creativity as tools for unity and purpose. Every young person deserves a chance to play, learn, and grow.",
   },
@@ -91,25 +94,31 @@ const fames = [
   {
     name: "Yakub Shakirudeen",
     title: "Highest Goal Scorer PWK 2.0",
-    image: Jamil,
+    image: hall1,
     nickName: "Farmerintech",
   },
   {
     name: "Yakub Shakirudeen",
     title: "Highest Goal Scorer PWK 2.0",
-    image: Mataya,
+    image: hall2,
     nickName: "Farmerintech",
   },
   {
     name: "Yakub Shakirudeen",
     title: "Highest Goal Scorer PWK 2.0",
-    image: Yakub,
+    image: hall3,
     nickName: "Farmerintech",
   },
   {
     name: "Mrs. Aisha Yusuf",
     title: "Best Keeper PWK 5.0",
-    image: Haleemah,
+    image: hall4,
+    nickName: "Farmerintech",
+  },
+   {
+    name: "Mrs. Aisha Yusuf",
+    title: "Best Keeper PWK 5.0",
+    image: hall5,
     nickName: "Farmerintech",
   },
 ];

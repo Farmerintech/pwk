@@ -26,7 +26,7 @@ export const Contact = () => {
             <input
               type="text"
               placeholder="Your name"
-              className="w-full bg-white/10 text-gray-400 py-3 px-5 rounded-lg placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 transition duration-150"
+              className="w-full bg-white/10 text-gray-400 py-3 px-5 rounded-lg placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-800 transition duration-150"
             />
           </div>
           <div>
@@ -34,7 +34,7 @@ export const Contact = () => {
             <input
               type="email"
               placeholder="Your email"
-              className="w-full bg-white/10 text-gray-400 py-3 px-5 rounded-lg placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 transition duration-150"
+              className="w-full bg-white/10 text-gray-400 py-3 px-5 rounded-lg placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-800 transition duration-150"
             />
           </div>
           <div>
@@ -42,12 +42,12 @@ export const Contact = () => {
             <textarea
               rows={4}
               placeholder="Write your message..."
-              className="w-full bg-white/10 text-gray-400 py-3 px-5 rounded-lg placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 transition duration-150"
+              className="w-full bg-white/10 text-gray-400 py-3 px-5 rounded-lg placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-800 transition duration-150"
             ></textarea>
           </div>
           <button
             type="submit"
-            className="w-full bg-orange-500 text-white py-3 rounded-xl hover:bg-orange-700 transition-all font-medium"
+            className="w-full bg-blue-700 hover:bg-blue-800 text-white py-3 rounded-xl  transition-all font-medium"
           >
             Send Message
           </button>

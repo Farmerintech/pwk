@@ -1,12 +1,13 @@
-import Hero from "../../assets/hero-g1.png";
-import Hero2 from "../../assets/hero-b.jpg";
-import Hero1 from "../../assets/hero-g1.jpg";
-import Hero3 from "../../assets/hero-g3.jpg";
-import Hero4 from "../../assets/hero.jpg";
+
+import hall1 from "../../assets/hall1.jpg"
+import hall2 from "../../assets/hall2.jpg"
+import hall3 from "../../assets/hall3.jpg"
+import hall4 from "../../assets/hall4.jpg"
+import hall5 from "../../assets/hall5.jpg"
 import { FaArrowRight } from "react-icons/fa";
 
 export const PWKGalleries = () => {
-  const imageSources = [Hero, Hero1, Hero2, Hero3, Hero4];
+  const imageSources = [hall5, hall1, hall2, hall3, hall4];
 
   const generatePhotos = () =>
     Array.from({ length: 9 }, (_, i) => imageSources[i % imageSources.length]);

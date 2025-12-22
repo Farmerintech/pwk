@@ -1,4 +1,4 @@
-import Hero from "../../assets/basketball.jpg";
+import Hero from "../../assets/wallpaper.jpg";
 
 export const About = () => {
   return (
