@@ -29,7 +29,7 @@ export const Input = ({ label, name, placeholder, value, action, icon, type = 't
           value={value}
           onChange={action}
           readOnly={name === 'walletAddress'}
-          className={`w-full bg-stone-100 text-gray-900 py-3 px-5 rounded-lg placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-500 transition duration-150 ${name === 'walletAddress' ? 'cursor-not-allowed opacity-70' : ''
+          className={`w-full bg-stone-100 text-gray-900 py-3 px-5 rounded-lg placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-800 transition duration-150 ${name === 'walletAddress' ? 'cursor-not-allowed opacity-70' : ''
             }`}
         />
         {type === "password" &&

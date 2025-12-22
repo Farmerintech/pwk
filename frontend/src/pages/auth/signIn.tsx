@@ -105,7 +105,7 @@ export const SignIn: React.FC = () => {
           className={`mt-8 w-full px-6 py-3 rounded-[8px] text-lg font-bold transition duration-300 
             ${isPending
               ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-              : "bg-green-600 hover:bg-green-700 text-white shadow-lg"
+              : "bg-blue-700 hover:bg-blue-800 text-white shadow-lg"
             }`}
         >
           {isPending ? (
@@ -121,7 +121,7 @@ export const SignIn: React.FC = () => {
       </div>
 
       <span className="text-gray-700 text-sm px-5 mt-4">
-        Have no account yet? <Link to="/sign_up/user" className="text-green-500 hover:underline cursor-pointer">Register</Link>
+        Have no account yet? <Link to="/sign_up/user" className="text-blue-800 hover:underline cursor-pointer">Register</Link>
       </span>
     </section>
   );

@@ -130,7 +130,7 @@ const messages = [
   })}
 </div>
 
-<div className="bg-gray-400 w-full h-1 md:h-2 mb-5">
+<div className="bg-gray-400 w-full h-[2px] md:h-2 mb-5">
   <div
     className="h-full bg-white transition-all duration-300"
     style={{ width: `${(index / 4) * 100}%` }}

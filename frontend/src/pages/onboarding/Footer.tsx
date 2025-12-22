@@ -17,10 +17,10 @@ export const Footer = () => {
         <div>
           <h3 className="text-lg font-semibold text-gray-900 mb-3">Quick Links</h3>
           <ul className="space-y-2 text-sm">
-            <li><a href="#team" className="hover:text-green-500 transition">Our Team</a></li>
-            <li><a href="#faq" className="hover:text-green-500 transition">FAQ</a></li>
-            <li><a href="#contact" className="hover:text-green-500 transition">Contact</a></li>
-            <li><a href="#docs" className="hover:text-green-500 transition">Documentation</a></li>
+            <li><a href="#team" className="hover:text-blue-800 transition">Our Team</a></li>
+            <li><a href="#faq" className="hover:text-blue-800 transition">FAQ</a></li>
+            <li><a href="#contact" className="hover:text-blue-800 transition">Contact</a></li>
+            <li><a href="#docs" className="hover:text-blue-800 transition">Documentation</a></li>
           </ul>
         </div>
 
@@ -51,7 +51,7 @@ export const Footer = () => {
       <div className="border-t border-gray-300 mt-10 pt-6 text-center text-sm text-gray-600">
         <p>© {new Date().getFullYear()} PWKY. All rights reserved.</p>
         <p className="mt-2 text-gray-700">
-          <span className="font-semibold text-orange-500">PWKY</span> Sports ⚡
+          <span className="font-semibold text-blue-800">PWKY</span> Sports ⚡
         </p>
       </div>
     </footer>

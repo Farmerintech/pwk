@@ -128,20 +128,22 @@ export const SignUpUser: React.FC = () => {
                   action={handleChange}
                 />
                 <Input
-                  label="Date of Birth (Day and Month Only)"
+                  label="Date of Birth"
                   name="DOB"
                   type="date"
                   placeholder="mm/dd"
                   value={formData.DOB}
                   action={handleChange}
                 />
+                </div>
+                <div className="md:mt-5 flex flex-col md:gap-5">
                 <div className="flex flex-col">
                   <label className="text-gray-900 text-sm mb-2">Gender</label>
                   <select
                     name="gender"
                     value={formData.gender}
                     onChange={handleChange}
-                    className="w-full bg-stone-50 outline-none text-gray-900 py-3 px-5 rounded-lg focus:ring-2 focus:ring-green-500"
+                    className="w-full bg-stone-50 outline-none text-gray-900 py-3 px-5 rounded-lg focus:ring-2 focus:ring-blue-800"
                   >
                     <option value="" disabled>Select Your Gender</option>
                     <option value="Male">Male</option>
@@ -188,7 +190,7 @@ export const SignUpUser: React.FC = () => {
                   name="LGA"
                   value={formData.LGA}
                   onChange={handleChange}
-                  className="w-full bg-stone-100 text-gray-900 py-3 px-5 rounded-lg focus:ring-2 outline-none focus:ring-green-500"
+                  className="w-full bg-stone-100 text-gray-900 py-3 px-5 rounded-lg focus:ring-2 outline-none focus:ring-blue-800"
                 >
                   <option value="" disabled>Select Your Local Government</option>
                   {LGAs.map(lga => (
@@ -228,14 +230,14 @@ export const SignUpUser: React.FC = () => {
               className={`mt-8 w-full px-6 py-3 rounded-xl text-lg font-bold transition
                 ${isPending
                   ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-                  : "bg-green-600 text-white hover:bg-green-700"
+                  : "bg-blue-700 text-white hover:bg-blue-800"
                 }`}
             >
               {isPending ? "Submitting..." : "Submit"}
             </button>
           </div>
              <span className="text-gray-700 text-sm px-10 mt-4">
-               Already have account? <Link to="/sign_in" className="text-green-500 hover:underline cursor-pointer">Login</Link>
+               Already have account? <Link to="/sign_in" className="text-blue-800 hover:underline cursor-pointer">Login</Link>
       </span>
         </form>
       </div>
