@@ -14,7 +14,7 @@ useEffect(() => {
 const messages = [
   "Interesting games for all youths",
   "State-of-the-art sports and entertainment",
-  "Interesting games that meet your goals",
+  "Interesting games that lifts your souls",
   "Proven track record of youth engagements",
 ];
   return (
